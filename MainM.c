@@ -6,7 +6,8 @@
 *  It allow to simulate different mathematical models such as:
 *  Resistance Capacitor electrical circuit, Direct Current electric motor,
 *  Alternative Current three phase induction motor.
-*   
+*  
+*  Aztec C compilers http://www.aztecmuseum.ca/compilers.htm
 */
 #include <stdio.h>
 
