@@ -1,0 +1,6 @@
+lb 3.40a 5-29-86
+**DIR**     asin        atan        floor       pow         log         
+random      sin         sinh        sqrt        tan         tanh        
+exp         fprintf     printf      sprintf     fformat     fscanf      
+scanf       sscanf      fscan       fabs        flt65       math        
+ftoa        atof        flt2        flt1        

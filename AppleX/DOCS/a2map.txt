@@ -1,0 +1,231 @@
+The comp.sys.apple2 Usenet newsgroup Apple II FAQs originate from
+the II Computing Apple II site, 1997-2012.
+
+Csa2 FAQs resource file: R032MMAP128.TXT
+
+128K Apple IIe Memory Map
+
+
+Note: To correctly view tables and diagrams on a super-res display,
+ use a mono-spaced Font such as CoPilot or PCMononspaced.
+
+____________________________
+
+
+
+
+128K Apple IIe Memory Map
+
+by David Empson
+
+
+
+
+         MAIN RAM         AUX RAM            I/O             ROM
+
+      ______________   ______________
+0000 |Main zero page| |Aux zero page |
+     |______________| |______________|
+0100 |  Main stack  | |  Aux stack   |
+     |______________| |______________|
+0200 |              | |              |
+     |              | |              |
+0300 |              | |              |
+     |______________| |______________|
+0400 |              | |              |
+     |              | |              |
+     | Main text/GR | |  Aux text/GR |
+     |              | |              |
+     |    page 1    | |    page 1X   |
+     |              | |              |
+     |              | |              |
+     |______________| |______________|
+0800 |              | |              |
+     |              | |              |
+     | Main text/GR | |  Aux text/GR |
+     |              | |              |
+     |    page 2    | |    page 2X   |
+     |              | |              |
+     |              | |              |
+     |______________| |______________|
+0C00 |              | |              |
+     |              | |              |
+           ...              ...
+     |              | |              |
+     |______________| |______________|
+2000 |              | |              |
+     |              | |              |
+     | Main Hi-res  | |  Aux Hi-res  |
+     |              | |              |
+     |    page 1    | |    page 1X   |
+     |              | |              |
+     |              | |              |
+     |______________| |______________|
+4000 |              | |              |
+     |              | |              |
+     | Main Hi-res  | |  Aux Hi-res  |
+     |              | |              |
+     |    page 2    | |    page 2X   |
+     |              | |              |
+     |              | |              |
+     |______________| |______________|
+6000 |              | |              |
+     |              | |              |
+     |              | |              |
+           ...              ...
+     |              | |              |
+     |              | |              |
+BFFF |______________| |______________|  _____________ 
+C000                                   | Motherboard |
+                                       |     I/O     |
+                                       |_____________|
+C090                                   |  Slot I/O   |
+                                       |  (DEVSEL)   |
+                                       |_____________|  _____________ 
+C100                                   |             | |             |
+                                       | Slot CX ROM | |  Int CX ROM |
+                                       |   (IOSEL)   | |             |
+                                       |             | |             |
+                                       |_____________| |_____________|
+C300                                   | Slot C3 ROM | |  Int C3 ROM |
+                                       |   (IOSEL)   | |             |
+                                       |_____________| |_____________|
+C400                                   |             | |             |
+                                       |             | |             |
+                                       | Slot CX ROM | |  Int CX ROM |
+                                       |   (IOSEL)   | |             |
+                                       |             | |             |
+                                       |             | |             |
+                                       |             | |             |
+                                       |_____________| |_____________|
+C800                                   |             | |             |
+                                       |   Slot ROM  | |             |
+                                       |  (IOSTROBE) | |  Int C3 ROM |
+                                       |             | |             |
+                                       |    shared   | |             |
+                                       |   between   | |             |
+                                       |    slots    | |             |
+CFFF  ______  ______   ______  ______  |_____________| |_____________|
+D000 |      ||      | |      ||      |                 |             |
+     | Main || Main | |  Aux ||  Aux |                 |             |
+     |      ||      | |      ||      |                 |             |
+     |  LC  ||  LC  | |  LC  ||  LC  |                 |             |
+     |      ||      | |      ||      |                 |             |
+     | bank || bank | | bank || bank |                 |             |
+     |   1  ||   2  | |   1  ||   2  |                 |  Applesoft  |
+     |______||______| |______||______|                 |             |
+E000 |              | |              |                 |    BASIC    |
+     |              | |              |                 |             |
+     |              | |              |                 |     ROM     |
+     |              | |              |                 |             |
+     |              | |              |                 |             |
+     |     Main     | |      Aux     |                 |             |
+     |              | |              |                 |             |
+     |   Language   | |   Language   |                 |             |
+     |              | |              |                 |             |
+     |     Card     | |     Card     |                 |             |
+     |              | |              |                 |             |
+     |              | |              |                 |.............|
+F800 |              | |              |                 |   Monitor   |
+     |              | |              |                 |             |
+     |              | |              |                 |     ROM     |
+FFFF |______________| |______________|                 |_____________|
+
+(If you have a RAMWorks or similar bank-switched card in the auxiliary
+slot, then any 64K bank on the card can be switched into the auxiliary
+memory space.  "Normal" auxiliary memory, which contains the video
+buffers, is bank 0 on the card.)
+
+
+The major soft-switches for bank switching control areas as follows:
+
+AUXZP/MAINZP selects main or auxiliary RAM in 0000-01FF (zero page and
+stack), and in D000-FFFF (language card), for read/write access.  The
+language card area is further affected by language card soft-switches
+(see later).
+
+RDMAIN/RDAUX selects main or auxiliary RAM in 0200-BFFF for read access
+only.  Text page 1/1X and Hi-res page 1/1X may be excluded depending on
+the state of the 80STORE and HIRES soft-switches.
+
+WRMAIN/WRAUX selects main or auxiliary RAM in 0200-BFFF for write access
+only.  Text page 1/1X and Hi-res page 1/1X may be excluded depending on
+the state of the 80STORE and HIRES soft-switches.
+
+80STORE enables 80-column switching of text/lo-res page 1 (0400-07FF).
+The active page (main or auxiliary) is determined by the PAGE1/PAGE2
+soft switch.  80STORE gives read/write access to whichever page is
+active.
+
+If 80STORE and HIRES are both enabled, then PAGE1/PAGE2 also control
+switching of hi-res page 1 (2000-3FFF).
+
+There is no special bank switching support for text or hi-res page 2/2X.
+Using the double resolution modes with these pages requires using
+another bank switching technique.
+
+SLOTCXROM/INTCXROM determines whether the slot address space or
+motherboard ROM is enabled for $C100-$C2FF and $C400-$C7FF.
+
+SLOTC3ROM/INTC3ROM determines whether the slot address space or
+motherboard ROM is enabled for $C300-$C3FF.
+
+The $C800-$CFFF area (I/O Stobe) is shared between all slots, and may be
+used by the internal ROM if INTC3ROM is active.  An access to the
+$CN00-$CNFF page (N=1 to 7) enables the expansion ROM space for slot N,
+if supported by that card.  An access to $CFFF disables the expansion
+ROM space for all cards.
+
+
+There are eight language card soft-switches to control selection of RAM
+bank 1 or 2, read enable for RAM or ROM, and write enable for RAM.
+
+Handy stub routines to access the auxiliary language card area are as
+follows:
+
+RDAUX1   SEI                ; No interrupts!
+         LDX C088           ; Read-enable language card bank 1
+         STA C009           ; Switch in auxiliary language card, etc.
+         LDA xxxx           ; Read target location (patched)
+         STA C008           ; Switch in main language card, etc.
+         LDX C08A           ; Switch the ROM back in
+         CLI                ; Enable interrupts
+         RTS
+
+WRAUX1   SEI                ; No interrupts!
+         LDX C08B           ; Read/write language card bank 1
+         LDX C08B           ; (must access twice)
+         STA C009           ; Switch in auxiliary language card, etc.
+         STA xxxx           ; Write target location (patched)
+         STA C008           ; Switch in main language card, etc.
+         LDX C08A           ; Switch the ROM back in
+         CLI                ; Enable interrupts
+         RTS
+
+RDAUX2   SEI                ; No interrupts!
+         LDX C080           ; Read-enable language card bank 2
+         STA C009           ; Switch in auxiliary language card, etc.
+         LDA xxxx           ; Read target location (patched)
+         STA C008           ; Switch in main language card, etc.
+         LDX C082           ; Switch the ROM back in
+         CLI                ; Enable interrupts
+         RTS
+
+WRAUX2   SEI                ; No interrupts!
+         LDX C083           ; Read/write language card bank 2
+         LDX C083           ; (must access twice)
+         STA C009           ; Switch in auxiliary language card, etc.
+         STA xxxx           ; Write target location (patched)
+         STA C008           ; Switch in main language card, etc.
+         LDX C082           ; Switch the ROM back in
+         CLI                ; Enable interrupts
+         RTS
+
+The C008/C009 switch controls both read and write access, unlike the
+switches for the main $0200-$BFFF area, but note the different
+instruction sequences needed to control read enable and read/write
+enable for the language card area.  (You could set up the language card
+for write-only access using C081 or C089 instead of C083 or C08B, but it
+won't make the code any shorter.)
+
+

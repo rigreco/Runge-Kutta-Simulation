@@ -1,0 +1,115 @@
+# ---------------------------------------------------------------------
+# makefile by bill buckels 2007
+# ---------------------------------------------------------------------
+
+rcrk.sys: rcrk.r mainm.r ov1.r ov2.r ov2f.r ov3.r outf.r ginit.r saveg.r p8file.r dcmotor.r outdc.r indc.r
+
+    LN65 -t -r +s +h 4000,6004 rcrk.R +C 2800 +D 400 ovld.r samain.r -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del rcrk.R
+    
+    MAKEPRO rcrk
+    del rcrk
+    @echo rcrk.SYS now created!
+    
+    LN65 -t mainm.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del mainm.R
+    @echo mainm.OVR now created!    
+    
+    LN65 -t OV1.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del OV1.R
+    @echo OV1.OVR now created!
+    
+    LN65 -t OV2.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del OV2.R
+    @echo OV2.OVR now created!  
+
+    LN65 -t OV2f.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del OV2f.R
+    @echo OV2f.OVR now created! 
+     
+    LN65 -t OV3.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del OV3.R
+    @echo OV3.OVR now created!  
+    
+    LN65 -t outf.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del outf.R
+    @echo outf.OVR now created! 
+
+    LN65 -t ginit.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del ginit.R
+    @echo ginit.OVR now created! 
+    
+    LN65 -t saveg.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del saveg.R
+    @echo saveg.OVR now created!     
+
+    LN65 -t p8file.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del p8file.R
+    @echo p8file.OVR now created!  
+
+    LN65 -t dcmotor.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del dcmotor.R
+    @echo dcmotor.OVR now created! 
+
+    LN65 -t outdc.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del outdc.R
+    @echo outdc.OVR now created!
+
+    LN65 -t indc.R ovbgn.r rcrk.RSM -lSYSIO -lg2 -lm -ls -lc -lSYSIO -lg2 -lm -ls -lc
+    del indc.R
+    @echo indc.OVR now created!
+
+    del rcrk.RSM
+    del rcrk.SYM
+    del mainm.SYM
+    del OV1.SYM
+    del OV2.SYM
+    del OV2f.SYM
+    del OV3.SYM
+    del outf.SYM
+    del ginit.SYM
+    del saveg.sym
+    del p8file.sym
+    del dcmotor.sym
+    del outdc.sym
+    del indc.sym 	
+	
+rcrk.r: rcrk.c
+      c65 rcrk.c
+      
+mainm.r: mainm.c
+      c65 mainm.c
+
+ov1.r: ov1.c
+      c65 ov1.c
+      
+ov2.r: ov2.c
+      c65 ov2.c 
+
+ov2f.r: ov2f.c
+      c65 ov2f.c 
+
+ov3.r: ov3.c
+      c65 ov3.c 
+
+outf.r: outf.c
+      c65 outf.c
+
+ginit.r: ginit.c
+      c65 ginit.c 
+
+saveg.r: saveg.c
+      c65 saveg.c 
+
+p8file.r: p8file.c
+      c65 p8file.c 
+
+
+dcmotor.r: dcmotor.c
+      c65 dcmotor.c 
+
+outdc.r: outdc.c
+      c65 outdc.c 
+
+indc.r: indc.c
+      c65 indc.c 

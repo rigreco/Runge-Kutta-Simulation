@@ -1,0 +1,239 @@
+/* ------------------------------------------------------------------------
+System       : Manx Aztec C65 Version 3.2b
+               MS-DOS cross-development environment
+Platform     : Apple IIe 128K PRODOS 8
+Program      : dxlode.c
+Description  : G2 Library Routine
+               Double Hi-Res 140 x 192 x 16 color Image Loader
+               xunch an xcrunched image to the screen
+Written by   : Bill Buckels
+Date Written : January 2013
+Revision     : 1.0 First Release
+Licence      : You may use this routine for whatever you wish as long
+               as you agree that Bill Buckels has no warranty or
+               liability obligations whatsoever from said use.
+------------------------------------------------------------------------ */
+#include <fcntl.h>
+
+extern unsigned DHRB[];
+extern char *dhrmain;
+extern char *dhraux;
+
+#define BLOCK_SIZE 1024
+
+
+/* LUT's (look-up tables) for discrete DHGR colors */
+
+/* auxiliary memory */
+unsigned char dhapix[16][7] = {
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x08,0x00,0x00,0x02,0x20,0x00,0x00,
+0x01,0x10,0x00,0x00,0x04,0x40,0x00,
+0x09,0x10,0x00,0x02,0x24,0x40,0x00,
+0x02,0x20,0x00,0x00,0x08,0x00,0x00,
+0x0A,0x20,0x00,0x02,0x28,0x00,0x00,
+0x03,0x30,0x00,0x00,0x0C,0x40,0x00,
+0x0B,0x30,0x00,0x02,0x2C,0x40,0x00,
+0x04,0x40,0x00,0x01,0x10,0x00,0x00,
+0x0C,0x40,0x00,0x03,0x30,0x00,0x00,
+0x05,0x50,0x00,0x01,0x14,0x40,0x00,
+0x0D,0x50,0x00,0x03,0x34,0x40,0x00,
+0x06,0x60,0x00,0x01,0x18,0x00,0x00,
+0x0E,0x60,0x00,0x03,0x38,0x00,0x00,
+0x07,0x70,0x00,0x01,0x1C,0x40,0x00,
+0x0F,0x70,0x00,0x03,0x3C,0x40,0x00};
+
+/* main memory */
+unsigned char dhmpix[16][7] = {
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x00,0x01,0x10,0x00,0x00,0x04,0x40,
+0x00,0x00,0x02,0x20,0x00,0x00,0x08,
+0x00,0x01,0x12,0x20,0x00,0x04,0x48,
+0x00,0x00,0x04,0x40,0x00,0x01,0x10,
+0x00,0x01,0x14,0x40,0x00,0x05,0x50,
+0x00,0x00,0x06,0x60,0x00,0x01,0x18,
+0x00,0x01,0x16,0x60,0x00,0x05,0x58,
+0x00,0x00,0x08,0x00,0x00,0x02,0x20,
+0x00,0x01,0x18,0x00,0x00,0x06,0x60,
+0x00,0x00,0x0A,0x20,0x00,0x02,0x28,
+0x00,0x01,0x1A,0x20,0x00,0x06,0x68,
+0x00,0x00,0x0C,0x40,0x00,0x03,0x30,
+0x00,0x01,0x1C,0x40,0x00,0x07,0x70,
+0x00,0x00,0x0E,0x60,0x00,0x03,0x38,
+0x00,0x01,0x1E,0x60,0x00,0x07,0x78};
+
+
+/* read and xunch an xcrunched image to the screen */
+
+/* These are raster oriented 4 bit color indexes in the range 0-15
+   which map to the double low-res color order. Each byte contains
+   2 pixels which results in a packet length of 70 bytes rather than
+   the 80 bytes required for the Apple II display. Indexes for even pixels
+   are stored in the low nibble and indexes for odd pixels are stored
+   in the high nibble.
+
+   Also by dealing with only the visible portion of Apple II
+   screen memory, additional space saving over a BSaved image is possible.
+
+   To further save disk space, each raster's color indexes are compressed
+   using ZSoft PCX RLE (run-length encoding).
+
+   When we unpack these we remap the indexes to colors using a LUT (look-up table).
+*/
+int dxlode(name)
+char *name;
+{
+   int fh,pattern=0,x,x1=0,xcnt,y1=0,z,offset=0,width,height,target,bytes=0;
+   unsigned char ch,color,buf[BLOCK_SIZE],*ptr;
+
+#asm
+    sta  $c054 ; MAIN MEM
+#endasm
+
+
+   fh = open(name,O_RDONLY,0x3C); /* open a binary file */
+   if (fh == -1) return -1;
+   x = read(fh,buf,5);
+
+   if (x!= 5) {
+	   close(fh);
+	   return -1;
+   }
+
+   if (buf[0] == 'X' && buf[1] == 'C' && buf[2] == 'C') {
+      width = buf[3];
+      height = buf[4];
+   }
+   else {
+	   close(fh);
+	   return -2;
+
+   }
+
+   if (read(fh,buf,BLOCK_SIZE) < BLOCK_SIZE) {
+	   close(fh);
+	   return -3;
+   }
+
+    width = width/2;
+    target = width * height;
+    ptr = (unsigned char *)DHRB[y1];
+
+	do{
+
+	    ch = buf[bytes]; bytes++;
+	    if (bytes == BLOCK_SIZE) {
+			read(fh,buf,BLOCK_SIZE); bytes = 0;
+		}
+
+	    /* check to see if its raw */
+	    /* if its not, run encoded */
+	    if(0xC0 == (ch & 0xc0)){
+	       	xcnt = 0x3f & ch;
+			ch = buf[bytes]; bytes++;
+			if (bytes == BLOCK_SIZE) {
+				read(fh,buf,BLOCK_SIZE); bytes = 0;
+			}
+	    }
+	    else
+	      xcnt = 1;
+
+	 	for(x=0;x<xcnt;x++){
+			if (offset < target) {
+				/* unpack the 2 colors - low nibble first */
+				color = ch & 0xf;
+				ch >>= 4;
+				for (z = 0; z < 2; z++ ) {
+					switch(pattern) {
+						case 0:
+						   		#asm
+									sta  $c055 ; AUX MEM
+                                #endasm
+								*ptr  = dhapix[color][0]; /* 00001111 4 bits */
+								#asm
+									sta  $c054 ; MAIN MEM
+                                #endasm
+								pattern++;
+								break;
+						case 1:
+						   		#asm
+									sta  $c055 ; AUX MEM
+                                #endasm
+								*ptr |= dhapix[color][1]; /* 01110000 3 bits */
+								#asm
+									sta  $c054 ; MAIN MEM
+                                #endasm
+								*ptr = dhmpix[color][1]; /* 00000001 1 bit */
+								pattern++;
+								break;
+						case 2:
+								*ptr |= dhmpix[color][2]; /* 00011110 4 bits */
+								pattern++;
+								break;
+						case 3:
+								*ptr |= dhmpix[color][3]; /* 01100000 2 bits */
+								*ptr++;
+						   		#asm
+									sta  $c055 ; AUX MEM
+                                #endasm
+								*ptr  = dhapix[color][3]; /* 00000011 2 bits */
+								#asm
+									sta  $c054 ; MAIN MEM
+                                #endasm
+								pattern++;
+								break;
+						case 4:
+						   		#asm
+									sta  $c055 ; AUX MEM
+                                #endasm
+								*ptr |= dhapix[color][4]; /* 00111100 4 bits */
+								#asm
+									sta  $c054 ; MAIN MEM
+                                #endasm
+								pattern++;
+								break;
+						case 5:
+								#asm
+                                	sta  $c055 ; AUX MEM
+                                #endasm
+								*ptr |= dhapix[color][5]; /* 01000000 1 bit */
+								#asm
+									sta  $c054 ; MAIN MEM
+                                #endasm
+								*ptr = dhmpix[color][5]; /* 00000111 3 bits */
+								pattern++;
+								break;
+						case 6:
+								*ptr |= dhmpix[color][6]; /* 01111000 4 bits */
+								*ptr++;
+								pattern = 0;
+
+						}
+
+						color = ch; /* double assignment to avoid conditional */
+				}
+				/* move down one raster every 70 bytes */
+				x1++;
+				if (x1 >= width) {
+					x1 = pattern = 0;
+					y1++;
+					if (y1 >= height)break;
+					ptr = (unsigned char *)DHRB[y1];
+				}
+			}
+			else break;
+
+			offset++;
+		}
+		if (y1 >= height)break;
+
+     } while(offset<target);
+
+   close(fh);
+
+#asm
+    sta  $c054 ; MAIN MEM
+#endasm
+
+    return 0;
+}

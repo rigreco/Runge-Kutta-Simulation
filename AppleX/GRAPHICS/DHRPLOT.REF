@@ -1,0 +1,263 @@
+/* the following array simplifies scanline origin offset
+   lookup in the hires screen area...
+   DHRB stands for Double High-Res Base-Address and is indexed
+   sequentially from scanline 0-191 which avoids the
+   ubiquituous venetian blind effect that we know and love */
+extern unsigned DHRB[];
+
+/*
+
+The following is logically reordered to match the lores
+color order...
+
+                                                Repeated
+                                                Binary
+          Color         aux1  main1 aux2  main2 Pattern
+          Black          00    00    00    00    0000
+          Magenta        08    11    22    44    0001
+          Dark Blue      11    22    44    08    1000
+          Violet         19    33    66    4C    1001
+          Dark Green     22    44    08    11    0100
+          Grey1          2A    55    2A    55    0101
+          Medium Blue    33    66    4C    19    1100
+          Light Blue     3B    77    6E    5D    1101
+          Brown          44    08    11    22    0010
+          Orange         4C    19    33    66    0011
+          Grey2          55    2A    55    2A    1010
+          Pink           5D    3B    77    6E    1011
+          Green          66    4C    19    33    0110
+          Yellow         6E    5D    3B    77    0111
+          Aqua           77    6E    5D    3B    1110
+          White          7F    7F    7F    7F    1111
+
+*/
+
+/*
+
+#define LOBLACK   	0
+#define LORED     	1
+#define LODKBLUE 	2
+#define LOPURPLE  	3
+#define LODKGREEN	4
+#define LOGRAY    	5
+#define LOMEDBLUE	6
+#define LOLTBLUE 	7
+#define LOBROWN   	8
+#define LOORANGE  	9
+#define LOGREY    	10
+#define LOPINK    	11
+#define LOLTGREEN	12
+#define LOYELLOW  	13
+#define LOAQUA    	14
+#define LOWHITE   	15
+
+*/
+
+/* the following array is based on the above */
+extern unsigned char dhrbytes[16][4];
+
+
+/* position of pixels in 4 byte pattern */
+/* remember that byte 0 and byte 2 are auxmem
+   and byte 1 and byte 3 are main mem
+   and the 4 bit pattern of the 7 pixels straddle
+   the two memory banks */
+
+/* 7 pixels = 4 bytes */
+
+/* left for reference...
+unsigned char dhrpattern[7][4] = {
+0,0,0,0,
+0,0,0,1,
+1,1,1,1,
+1,1,2,2,
+2,2,2,2,
+2,3,3,3,
+3,3,3,3};
+
+*/
+
+/* mask values to erase previous contents of pixels */
+/* for reference
+
+unsigned char dhrmsk[7][2] = {
+0x70, 0,
+0x0f, 0x7e,
+0x61, 0,
+0x1f, 0x7c,
+0x43, 0,
+0x3f, 0x78,
+0x07, 0};
+
+*/
+
+/* getpixel mask values - what color to use */
+/* for reference
+
+unsigned char dhrgetmsk[7][2] = {
+0x0f, 0,
+0x70, 0x01,
+0x1e, 0,
+0x60, 0x03,
+0x3c, 0,
+0x40, 0x07,
+0x78, 0};
+
+*/
+
+
+/* the following soft switches select between
+   upper and lower banks of video memory */
+extern char *dhrmain;
+extern char *dhraux;
+
+
+/* offset into memory frame for pixels */
+/* double hi-res xbase */
+/* for reference
+
+char DHB[140] = {
+0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,
+4,4,4,4,4,4,4,
+6,6,6,6,6,6,6,
+8,8,8,8,8,8,8,
+10,10,10,10,10,10,10,
+12,12,12,12,12,12,12,
+14,14,14,14,14,14,14,
+16,16,16,16,16,16,16,
+18,18,18,18,18,18,18,
+20,20,20,20,20,20,20,
+22,22,22,22,22,22,22,
+24,24,24,24,24,24,24,
+26,26,26,26,26,26,26,
+28,28,28,28,28,28,28,
+30,30,30,30,30,30,30,
+32,32,32,32,32,32,32,
+34,34,34,34,34,34,34,
+36,36,36,36,36,36,36,
+38,38,38,38,38,38,38};
+
+*/
+
+
+
+/* a double hi-res pixel can occur at any one of 7 positions */
+/* in a 4 byte block which spans aux and main screen memory */
+/* the horizontal resolution is 140 pixels */
+int dhrplot(x,y,drawcolor)
+int x, y, drawcolor;
+{
+    int xoff, pattern;
+    unsigned char *ptr;
+
+
+    if (x < 0 || x > 159 || y < 0 || y > 191)return 0;
+
+    pattern = (x%7);
+
+    if (pattern > 3)xoff = ((x/7) * 2) + 1;
+    else xoff = (x/7) * 2;
+
+    ptr = (unsigned char *) (DHRB[y] + xoff);
+
+
+    /* In praise of the common bitmask...
+
+       The following algorithm uses a simple bitmask
+       to erase the target pixel "in place". The same technique
+       is used to extract the appropriate new target pixel
+       value from a color palette array which contains the
+       7 possible pixel values (in 4 bit blocks), and this new
+       value is inclusively bitwise OR'd "in place" into
+       the position where the previous value was erased
+       (in the appropriate area of screen memory).
+
+       The tricky part here (if there is a tricky part) is
+       understanding that the high bit is skipped
+       in each byte and that pixel order direction is from
+       bit 0 to bit 6. The other consideration is that
+       some of the pixels span the interleaving of aux and
+       main memory "pages". It really isn't too hard to
+       understand if you look at the binary values in the
+       code below using your favourite scientific calculator.
+
+       Keep in mind that when you use a bitwise AND against a
+       bitmask, the binary mask will protect the values
+       that hide behind the 1's and erase the values that
+       hide behind the 0's. Also keep in mind that an inclusive
+       OR is like sliding the two values together into a
+       single bitwise value (recombinance).
+
+       So there you have it... a simple process to work
+       with a convoluted twisted puppy of a hardware display.
+
+       I should note that the reason I chose to work with
+       constants below rather than reduce this to an array
+       driven function was two-fold... first-off it was easier
+       to read and to to test (i.e. to visually organize)
+       but more importantly the use of constants seems to me
+       to be a tad more efficient... and if I am wrong then
+       I admit to being imperfect. */
+
+    *dhrmain = 0; /* set to main memory */
+
+	switch(pattern)
+	{
+		/* left this here for reference
+
+		unsigned char dhrpattern[7][4] = {
+		0,0,0,0,
+		0,0,0,1,
+		1,1,1,1,
+		1,1,2,2,
+		2,2,2,2,
+		2,3,3,3,
+        3,3,3,3};
+        */
+
+		case 0: *dhraux = 0; /* select auxilliary memory */
+                *ptr &= 0x70;
+                *ptr |= (dhrbytes[drawcolor][0] &0x0f);
+ 		        *dhrmain = 0; /* reset to main memory */
+		        break;
+		case 1: *dhraux = 0; /* select auxilliary memory */
+                *ptr &= 0x0f;
+                *ptr |= (dhrbytes[drawcolor][0] & 0x70);
+ 		        *dhrmain = 0; /* reset to main memory */
+		        *ptr &= 0x7e;
+		        *ptr |= (dhrbytes[drawcolor][1] & 0x01);
+		        break;
+		case 2: *ptr &= 0x61;
+		        *ptr |= (dhrbytes[drawcolor][1] & 0x1e);
+		        break;
+		case 3: *ptr &= 0x1f;
+		        *ptr |= (dhrbytes[drawcolor][1] & 0x60);
+		        *dhraux = 0; /* select auxilliary memory */
+		        *ptr++;      /* advance offset in frame */
+                *ptr &= 0x7c;
+                *ptr |= (dhrbytes[drawcolor][2] & 0x03);
+ 		        *dhrmain = 0; /* reset to main memory */
+		        break;
+		case 4: *dhraux = 0; /* select auxilliary memory */
+                *ptr &= 0x43;
+                *ptr |= (dhrbytes[drawcolor][2] & 0x3c);
+ 		        *dhrmain = 0; /* reset to main memory */
+		        break;
+		case 5: *dhraux = 0; /* select auxilliary memory */
+                *ptr &= 0x3f;
+                *ptr |= (dhrbytes[drawcolor][2] & 0x40);
+ 		        *dhrmain = 0; /* reset to main memory */
+                *ptr &= 0x78;
+                *ptr |= (dhrbytes[drawcolor][3] & 0x07);
+ 		        break;
+		case 6: *ptr &= 0x07;
+                *ptr |= (dhrbytes[drawcolor][3] & 0x78);
+ 		        break;
+	}
+
+*dhrmain = 0; /* reset to main memory */
+
+return 0;
+
+}

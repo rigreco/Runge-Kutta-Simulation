@@ -1,0 +1,408 @@
+# /* ------------------------------------------------------------------------
+# System       : Manx Aztec C65 Version 3.2b
+#                MS-DOS cross-development environment
+# Platform     : Apple IIe 128K PRODOS 8
+# Program      : G2 Library MAKEFILE
+# Description  : This is the MAKEFILE for my highly modified
+#                and expanded "catch-all" version  
+#                of the Aztec C Graphics Library (G.LIB).
+#
+#                The original was shipped from Manx when I first bought 
+#                the compiler, circa 1990, with another programmer, Les Gros, 
+#                for a contract for the Apple II and C64 that we took together.
+#                The contract involved the heavy use of graphics.
+#
+#		 By comparison to IBM-PC Compiler Libraries which I had
+#                become accustomed, G.LIB offered only a starting point so I
+#                set-out to fill-in the blanks in G2.lib for ProDOS
+#                (and in SYSIO.LIB).
+#
+#                Then, when I resurrected all this a few years ago I ported
+#                many of my old routines to DOS 3.3 as well, then expanded
+#                the DOS 3.3 routines in G3.lib, back-ported the new routines
+#                to ProDOS and then started adding to the ProDOS routines
+#                again fall 2012 and winter of 2012/2013.
+#
+#                23 years later I have kept expanding the thing and 
+#                consequently it is now simply where I put my stuff
+#                which is unlikely to ever change. 
+# 
+# Modified by   : Bill Buckels
+# Revision Date:  January 2013
+# 
+# Licence      : You may use this code for whatever you wish as long
+#                as you agree that Bill Buckels has no warranty or
+#                liability obligations whatsoever from said use.
+# ------------------------------------------------------------------------ */
+# 
+
+
+# Comment from 2008 - still true, but vastly expanded-on. 
+#
+# among other things...
+# this make file creates a "new" prodos graphics library which
+# replaces g.lib which came with the Aztec C ProDOS compiler  
+# with an hgr screen base at 0x4000 instead of 0x2000
+# stores an "expanded" font of size 1096 at 0x0c00
+# uses data "library" storage transfer buffer at 0x0c00+1096
+# uses ems (auxmem) at 0x0c00 with a signature at 2048 in main memory
+# loads to ems (auxmem) with a size 4000 buffer at 4196
+# ems (auxmem) is accessed with complementary putimage and getimage functions
+
+g2.lib: plots.r emslode.r emsput.r emsput2.r fbox2.r hibase2.r \
+        monochar.r monoline.r monoplot.r \
+        call33.r bottom.r putrax.r bars.r emsget.r emsrag.r \
+        emsrig.r dlores2.r dlopixel.r dlofont.r drfbox.r \
+        bopen.r drawline.r bsave.r bload.r picsave.r dmonline.r \
+        subchar.r liblode.r fontlode.r fileplot.r filechar.r \
+        hgr.r text.r plotchar.r circle.r line.r plot.r clear.r clear1.r \
+        page.r fscreen.r mscreen.r setasp.r play.r dmonbyte.r \
+        grafmode.r fbox.r piclode.r putimage.r hibase.r poke.r \
+        getch.r kbhit.r sound.r keyclr.r hibox.r pchar.r \
+        lofont.r lores.r lopixel.r textbase.r dhrcalc.r dmonchar.r \
+        dhrfont.r dlodelo.r drbytes.r drflood.r drmain.r lolode.r \
+        dhrplot.r drlode.r hibase3.r grafmodx.r dlores.r \
+        dhvlin.r dhcirc.r dhrline.r dhdisc.r dmonplot.r dxlode.r \
+        dxlut.r dxblock.r dxline.r dxlode2.r dhrcalc2.r dwait.r \
+        dhrpixel.r dplode.r crt80.r putchar.r ff.r strulr.r raxlode.r \
+        ffg.r d2circ.r d2fbox.r d2flood.r d2font.r d2init.r d2line.r \
+        d2lode.r d2plot.r d2vline.r d2pld.r d2save.r MAKEFILE hbsh.r
+	lb g2 plots.r 
+	lb g2 -a+ emslode.r emsput.r emsput2.r fbox2.r hibase2.r
+	lb g2 -a+ monochar.r monoline.r monoplot.r
+	lb g2 -a+ bopen.r drawline.r bsave.r bload.r picsave.r
+	lb g2 -a+ subchar.r dlores2.r dlopixel.r dlofont.r dxlut.r
+	lb g2 -a+ liblode.r fontlode.r fileplot.r filechar.r hbsh.r
+	lb g2 -a+ hgr.r text.r plotchar.r circle.r line.r plot.r clear.r
+	lb g2 -a+ page.r fscreen.r mscreen.r setasp.r dmonline.r clear1.r
+	lb g2 -a+ play.r dhrcalc.r dhvlin.r drfbox.r dmonplot.r 
+	lb g2 -a+ grafmode.r fbox.r piclode.r putimage.r hibase.r poke.r
+	lb g2 -a+ getch.r kbhit.r sound.r dhdisc.r dmonbyte.r dxlode.r
+	lb g2 -a+ call33.r bottom.r putrax.r bars.r emsget.r emsrag.r
+	lb g2 -a+ emsrig.r keyclr.r dhcirc.r dhrline.r dmonchar.r
+	lb g2 -a+ hibox.r pchar.r lofont.r lores.r lopixel.r textbase.r
+	lb g2 -a+ dhrfont.r dlodelo.r drbytes.r drflood.r drmain.r
+	lb g2 -a+ dhrplot.r drlode.r hibase3.r grafmodx.r dlores.r
+	lb g2 -a+ dxblock.r dxline.r dxlode2.r dhrcalc2.r dwait.r 
+	lb g2 -a+ dhrpixel.r dplode.r crt80.r putchar.r ff.r strulr.r
+	lb g2 -a+ raxlode.r ffg.r d2lode.r d2plot.r d2vline.r d2pld.r
+	lb g2 -a+ d2circ.r d2fbox.r d2flood.r d2font.r d2init.r d2line.r 
+	lb g2 -a+ d2save.r lolode.r
+
+lolode.r: lolode.c
+  c65 lolode.c
+
+monochar.r: monochar.c
+  c65 monochar.c
+  
+monoline.r: monoline.c
+  c65 monoline.c
+
+monoplot.r: monoplot.c
+  c65 monoplot.c
+
+hbsh.r: hbsh.c
+  c65 hbsh.c
+
+d2save.r: d2save.c
+  c65 d2save.c
+
+d2pld.r: d2pld.c
+  c65 d2pld.c
+
+d2circ.r: d2circ.c 
+  c65 d2circ.c 
+
+d2fbox.r: d2fbox.c 
+  c65 d2fbox.c 
+
+d2flood.r: d2flood.c 
+  c65 d2flood.c 
+
+d2font.r: d2font.c 
+  c65 d2font.c 
+
+d2init.r: d2init.c 
+  c65 d2init.c 
+
+d2line.r: d2line.c 
+  c65 d2line.c 
+
+d2lode.r: d2lode.c 
+  c65 d2lode.c 
+
+d2plot.r: d2plot.c 
+  c65 d2plot.c 
+
+d2vline.r: d2vline.c
+  c65 d2vline.c
+
+ffg.r: ffg.c
+  c65 ffg.c
+	
+raxlode.r: raxlode.c
+  c65 raxlode.c
+  
+strulr.r: strulr.c
+  c65 strulr.c
+
+ff.r: ff.c
+  c65 ff.c
+
+putchar.r: putchar.c
+  c65 putchar.c
+
+crt80.r: crt80.c
+  c65 crt80.c
+  
+dplode.r: dplode.c
+  c65 dplode.c
+
+dhrpixel.r: dhrpixel.c
+  c65 dhrpixel.c	
+
+dwait.r: dwait.c
+  c65 dwait.c	
+
+dxblock.r: dxblock.c
+  c65 dxblock.c	
+
+dxline.r: dxline.c
+  c65 dxline.c	
+
+dxlut.r: dxlut.c
+  c65 dxlut.c	  
+  
+dxlode2.r: dxlode2.c
+  c65 dxlode2.c	  
+
+dxlode.r: dxlode.c
+  c65 dxlode.c	
+	
+dmonchar.r: dmonchar.c
+  c65 dmonchar.c
+	
+dmonbyte.r: dmonbyte.c
+  c65 dmonbyte.c
+  
+dmonplot.r: dmonplot.c
+  c65 dmonplot.c
+
+dmonline.r: dmonline.c
+  c65 dmonline.c
+  
+dhcirc.r: dhcirc.c
+  c65 dhcirc.c
+
+dhdisc.r: dhdisc.c
+  c65 dhdisc.c
+
+dhrline.r: dhrline.c
+  c65 dhrline.c
+	
+drfbox.r: drfbox.c
+  c65 drfbox.c
+	
+dhrcalc.r: dhrcalc.c
+  c65 dhrcalc.c
+  
+dhrcalc2.r: dhrcalc2.c
+  c65 dhrcalc2.c  
+
+dhvlin.r: dhvlin.c
+  c65 dhvlin.c
+
+dlores2.r: dlores2.c
+  c65 dlores2.c
+
+dlofont.r: dlofont.c
+  c65 dlofont.c
+
+dlopixel.r: dlopixel.c
+  c65 dlopixel.c
+
+dlores.r: dlores.c
+  c65 dlores.c
+
+grafmodx.r: grafmodx.c
+  c65 grafmodx.c
+
+hibase3.r: hibase3.c
+  c65 hibase3.c
+
+drlode.r: drlode.c
+  c65 drlode.c
+
+dhrplot.r: dhrplot.c
+  c65 dhrplot.c
+
+dhrfont.r: dhrfont.c
+  c65 dhrfont.c
+  
+dlodelo.r: dlodelo.c
+  c65 dlodelo.c
+
+drbytes.r: drbytes.c
+  c65 drbytes.c
+
+drflood.r: drflood.c 
+  c65 drflood.c
+
+drmain.r: drmain.c
+  c65 drmain.c
+
+keyclr.r: keyclr.c
+   c65 keyclr.c
+   
+hibox.r: hibox.c
+   c65 hibox.c
+
+pchar.r: pchar.c
+   c65 pchar.c
+   
+lofont.r: lofont.c
+   c65 lofont.c
+   
+lores.r: lores.c   
+   c65 lores.c
+   
+lopixel.r: lopixel.c
+   c65 lopixel.c
+   
+textbase.r: textbase.c
+   c65 textbase.c
+
+plots.r: plots.c
+  c65 plots.c    
+
+emslode.r:  emslode.c 
+  c65 emslode.c 
+  
+emsput.r:   emsput.c 
+  c65 emsput.c 
+  
+emsput2.r:   emsput2.c 
+  c65 emsput2.c   
+  
+fbox2.r: fbox2.c 
+  c65 fbox2.c 
+  
+hibase2.r:  hibase2.c
+  c65 hibase2.c
+  
+bopen.r: bopen.c 
+  c65 bopen.c 
+  
+drawline.r: drawline.c 
+  c65 drawline.c
+  
+bsave.r: bsave.c 
+  c65 bsave.c 
+  
+bload.r: bload.c 
+  c65 bload.c 
+  
+picsave.r:  picsave.c
+  c65 picsave.c
+  
+subchar.r:  subchar.c
+  c65 subchar.c
+  
+liblode.r:  liblode.c 
+  c65 liblode.c 
+  
+fontlode.r: fontlode.c 
+  c65 fontlode.c 
+  
+fileplot.r: fileplot.c 
+  c65 fileplot.c 
+  
+filechar.r: filechar.c
+  c65 filechar.c
+  
+hgr.r:   hgr.c 
+  c65 hgr.c 
+  
+text.r:  text.c 
+  c65 text.c
+  
+plotchar.r: plotchar.c 
+  c65 plotchar.c 
+  
+circle.r:   circle.c 
+  c65 circle.c 
+  
+line.r:  line.c 
+  c65 line.c
+  
+plot.r:  plot.c 
+  c65 plot.c
+  
+clear.r: clear.asm
+   as65 clear.asm
+
+clear1.r: clear1.asm
+   as65 clear1.asm
+
+page.r:  page.c 
+   c65 page.c 
+   
+fscreen.r:  fscreen.c 
+   c65 fscreen.c 
+   
+mscreen.r:  mscreen.c 
+   c65 mscreen.c 
+ 
+setasp.r:   setasp.c
+   c65 setasp.c
+ 
+play.r:  play.c
+   c65 play.c
+ 
+grafmode.r: grafmode.c
+   c65 grafmode.c
+   
+fbox.r:  fbox.c 
+   c65 fbox.c 
+   
+piclode.r:  piclode.c 
+   c65 piclode.c 
+   
+putimage.r: putimage.c
+   c65 putimage.c
+   
+hibase.r:   hibase.c 
+   c65 hibase.c 
+   
+poke.r:  poke.c
+   c65 poke.c
+   
+getch.r: getch.c 
+   c65 getch.c 
+   
+kbhit.r: kbhit.c 
+   c65 kbhit.c 
+   
+sound.r: sound.c
+   c65 sound.c
+   
+call33.r: call33.c
+  c65 call33.c   
+
+bottom.r: bottom.c
+  c65 bottom.c   
+  
+putrax.r: putrax.c
+  c65 putrax.c  
+  
+bars.r: bars.c
+  c65 bars.c        
+ 
+emsget.r: emsget.c
+  c65 emsget.c        
+  
+emsrag.r: emsrag.c
+  c65 emsrag.c   
+
+emsrig.r: emsrig.c
+  c65 emsrig.c 

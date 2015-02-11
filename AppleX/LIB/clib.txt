@@ -1,0 +1,21 @@
+lb 3.40a 5-29-86
+**DIR**     tmpfile     perror      fdopen      fopen       fseek       
+scanf       gets        getchar     fscanf      fgets       agetc       
+fread       getw        getc        puterr      printf      puts        
+putchar     fprintf     fputs       aputc       fwrite      putw        
+putc        getbuff     setbuf      tmpnam      mktemp      ungetc      
+getenv      calloc      malloc      access      data        execp       
+exec        isatty      open        casecvt     lseek       read        
+write       rename      geteof      seteof      seteofu     getfinfo    
+getfinfu    setfinfo    setfinfu    getiob      setiob      mkdir       
+rsvstk      brk         sbrk        crt0        shmain      exit        
+close       unlink      fixnam      fixnamu     setprfx     getprfx     
+strshft     device      exitu       devtab      gdev        ioctl       
+ctime       asctime     gettime     localtim    time        system      
+atoi        atol        qsort       sscanf      scan        sprintf     
+format      ctype       swapmem     setmem      rindex      strrchr     
+strncat     fstswt      tmpsav      strequ      index       strchr      
+movmem      move        strncpy     strncmp     strcat      strcmp      
+strcpy      istack      lmath       strlen      swit        math        
+shift       lshift      stack       sup         interp      fldstar     
+flt         longs       setjmp      

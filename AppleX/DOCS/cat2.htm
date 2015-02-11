@@ -1,0 +1,3314 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<TITLE>Alphabetical Utility Commands - Manx Aztec C 6502 for Apple II ProDOS</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#008000" ALINK="#008000" VLINK="#008000">
+<a name=topmenu></a><FONT FACE="Arial" SIZE=3><P>
+
+<B>Manx Aztec C 6502 for Apple II ProDOS
+<br>Alphabetical (more or less) Utility Commands</B></FONT>
+<FONT FACE="Arial" SIZE=2 COLOR="#000000">
+<UL>
+<a href="./cat2.htm#intro">Introduction</a><br>
+<br>
+<b>Assembler, Compiler, Library Utility and Linker</b><br>
+<a href="./cat2.htm#AS">as, asi, as65</a><br>
+<a href="./cat2.htm#CC">cc, cci, c65</a><br>
+<a href="./cat2.htm#LB">lb</a><br>
+<a href="./cat2.htm#LN">ln, ln65</a><br>
+<br>
+<b>Utilities and Shell Commands</b><br>
+<a href="./cat2.htm#ARC">arcv, mkarcv</a><br>
+<a href="./cat2.htm#BYE">bye</a><br>
+<a href="./cat2.htm#CAT">cat</a><br>
+<a href="./cat2.htm#CD">cd</a><br>
+<a href="./cat2.htm#CMP">cmp</a><br>
+<a href="./cat2.htm#CNM">cnm</a><br>
+<a href="./cat2.htm#CP">cp</a><br>
+<a href="./cat2.htm#CRC">crc</a><br>
+<a href="./cat2.htm#DAT">date</a><br>
+<a href="./cat2.htm#DEB">debug</a><br>
+<a href="./cat2.htm#DF">df</a><br>
+<a href="./cat2.htm#DIF">diff</a><br>
+<a href="./cat2.htm#ECH">echo</a><br>
+<a href="./cat2.htm#GRE">grep</a><br>
+<a href="./cat2.htm#HD">hd</a><br>
+<a href="./cat2.htm#LOC">lock, unlock</a><br>
+<a href="./cat2.htm#LS">ls</a><br>
+<a href="./cat2.htm#MKD">mkdir</a><br>
+<a href="./cat2.htm#MV">mv</a><br>
+<a href="./cat2.htm#OBD">obd</a><br>
+<a href="./cat2.htm#ORD">ord</a><br>
+<a href="./cat2.htm#PR">pr</a><br>
+<a href="./cat2.htm#PWD">pwd</a><br>
+<a href="./cat2.htm#RM">rm</a><br>
+<a href="./cat2.htm#SET">set</a><br>
+<a href="./cat2.htm#SHI">shift</a><br>
+<a href="./cat2.htm#SQZ">sqz</a><br>
+<a href="./cat2.htm#TTY">tty</a><br>
+<a href="./cat2.htm#VED">ved</a><br>
+</UL>
+
+
+<HR>
+<a name=intro></a><b>Introduction</b>
+<BR>
+<BR>
+This is an HTML version of the electronic manual for Manx Aztec C for Apple II
+ProDOS released as freeware by Phade Software December 1999. The release notes
+for the electronic manual
+indicate that the electronic manual contains the same information as the paper
+manual distributed by Manx Software Systems with the compiler. However, they
+also indicate that if you are using the AZTEC PLUS release you should use the
+electronic manual rather than the paper manual supplied by Manx. Welcome to the
+wonderfully confusing World of Aztec C!
+<BR>
+<BR>
+The release notes for the electronic manual also indicate that the following
+notation in the synopsis part of a
+manual page only means that the function or utility is available both in UNIX and on
+the Apple II, but despite that fact, the description for that function or utility may differ
+between the Apple II and UNIX versions:
+<PRE><FONT SIZE=2>
+        /* Apple // and UNIX function */ or
+        /* Apple // and UNIX utility */
+</PRE></FONT>
+The contact information in the release notes for the electronic manual is as follows, but
+Manx Software Systems have apparently since faded from existence:
+<BR>
+<BR>
+Manx Software Systems<BR>
+P.O. Box 55<BR>
+Shrewsbury, N.J 07701
+<BR>
+<BR>
+Phade Software<BR>
+Inh. Frank Gadegast<BR>
+Schierker Strasse 39<BR>
+1000 Berlin 44 - Germany
+<BR>
+<BR>
+The HTML version (this document and others) was produced by Canadian Software Developer
+Bill Buckels by reformatting
+the Phade Software UNIX style man pages from the elctronic manual into consolidated HTML
+documents after converting these from Apple II text to IBM text. The original format has been
+preserved as much as practically possible, and the content of the Phade Software electronic
+manual remains apparently intact and unaltered in its transition to HTML.
+<BR>
+<BR>
+The main benefits of the HTML version are that you can view the information in the man pages
+on a single HTML document
+using a web browser in the relative comfort of a modern user interface and can use your
+web browsers "Find on this Page" feature to search through the content to easily locate
+information using your own search criteria. This is much easier than using the unix style
+man utility which can only search on key topics and will only display a single topic at a time.
+<BR>
+<BR>
+<b>Licence and Disclaimer</b>
+<BR>
+<BR>
+This is a derivative work and as such the licencing by the original authors applies. Bill Buckels
+makes no claims of ownership whatsoever for the content of this document, and further assumes no
+liability for the results its use.
+<BR>
+<BR>
+You may use the information in this document in any way you find useful (subject to the
+original authors restrictions and apparently there aren't any),
+provided that you agree that Bill Buckels has no warranty obligations or
+liability resulting from said use in any way whatsoever. If you
+don't agree, don't use this document.
+<BR>
+<BR>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br>
+
+<HR><a name=ARC></a><b> NAME arcv, mkarcv</b><br><br>
+arcv, mkarcv - source dearchiver and archiver
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+arcv arcfile                                         /* Apple // Utility */
+
+mkarcv arcfile
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+arcv extracts the source from the archive arcfile, which has been prevously
+created  be mkarcv, placing  the results in seperated  files in the current
+directory.
+
+mkarcv creates the  archive file  arcfile, placing  it in  the files  whose
+names  it reads from its  standard input. Only on file  name is read from a
+standard input line.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+For example, the  file header.arc contains  the source for  all the  header
+files. To create these header files, enter:
+
+         arcv header.arc
+
+The files will be created in the current directory.
+
+The  following command  creates the  archive myarc.arc  containing the file
+in.c, out.c, and hello.c:
+
+        mkarcv myarc < myarc.bld
+
+The names of the three files are contained in the file myarc.bld:
+
+        in.c
+        out.c
+        hello.c
+</PRE></FONT><b> BUGS </b><br><br><PRE><FONT SIZE=2>
+It's not possible to archive whole subdirectories and arcv can't find files
+with the complete pathname (that means the files for the archive have to be
+in the current directory).
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=AS></a><b> NAME as, asi, as65</b><br><br>
+as, asi, as65 - Aztec C assemblers
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+as [-options] prog.asm                        /* Apple // ProDOS utility */
+
+asi [-options] prog.asm
+
+The 6502 assembler is named as on native versions of Aztec C65 and as65 on
+cross development versions.
+
+Relocatable object files are named .r on the MS-DOS cross development version
+of Aztec C65.
+
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+as and asi are  relocating assemblers that  translate an assembly  language
+source  program into  relocatable object  code. The  two assemblers support
+different machines: as accepts assembly language  for a 6502 or 65C02;  asi
+accepts assembly language for a "pseudo machine".
+
+In  an executable program, an asi-assembled module must be interpreted by a
+routine that is in the Aztec libraries.
+
+An executable program  can contain  both modules that  have been  assembled
+with as and modules that have been assembled with asi.
+
+This description has three sections: the first describes how to operate the
+assembler; the  second describes  the assembler's  options; and  the  third
+presents  information  of  interest  to  those  writing  assembly  language
+programs.
+
+ 1. OPERATING INSTRUCTIONS
+
+Operationally, the  two  assemblers  are very  similar.  In  the  following
+paragraphs,  we will use  the name as  when referring to  features that are
+common to both assemblers. When the two assemblers differ, we will say so.
+
+as is started with a command line of the form
+
+    as [-options] prog.asm
+
+where [-options] are optionally parameters and prog.asm is the name of  the
+file  to be assembled.  as reads the  source code from  the specified file,
+translates it into object code, and writes the object code to another file.
+
+1.1 The Source File
+
+The extension on the source file  name is optional. If not specified,  it's
+assumed to be .asm . For example, with the following command, the assembler
+will assume that the file is test.asm:
+
+    as test
+
+as will append  .asm to  the source  file name only  if it  doesn't find  a
+period  in the file name. So if the  name of the source file really doesn't
+have an extension, you must assemble it like this:
+
+    as filename.
+
+The period tells the assembler not to append .asm to the name.
+
+1.2 The Object File
+
+By default, the name of the file to which as writes object code is  derived
+from  the name of the source code file, by changing its extension to .o (or
+to  .i, if asi is used). Also by default, the object code file is placed in
+the directory that contains the source code file. For example, the command
+
+    as test.asm
+
+writes object code  to the  file test.o  (or to  test.i, if  asi is  used),
+placing this file in the current directory.
+
+You  can explicitly specify the name of  the object code file, using the -O
+option. The  name of  the object  code  file follows  the -O,  with  spaces
+between  the  -O and  the  file name.  For  example, the  following command
+assembles test.asm, writing the object code to the file prog.out:
+
+    as -o prog.out test.asm
+
+1.3 The Listing File
+
+The -L option causes the assembler to create a file containing a listing of
+the  program beeing  assembled. The  file is  placed in  the directory that
+contains the  object file;  its derived  from that  of the  object file  by
+changing the extension to .lst .
+
+1.4 Searching for instxt files
+
+The  instxt directive tells as to suspend assembly of one file and assemble
+another; when assembly  of the second  file is completed,  assembly of  the
+first continues.
+
+You  can  make  the assembler  search  for  instxt file  in  a  sequence of
+directories, thus allowing source files and instxt files to be in different
+directories.
+
+Directories  that are to be searched are defined just as for the compilers;
+that  is,  using  the  -I  assembler  option  or  the  INCLUDE  environment
+variable. Optionally, the compiler can also serach the current directory.
+
+Directory  search  for a  particular instxt  directive  can be  disabled by
+specifying a  directory name  in  the directive.  In  this case,  just  the
+specified directory is searched.
+
+1.4.1 The -I option
+
+A  -I option defines a single directory  to be searched. The directory name
+follows the -I, with no intervening  blanks. For example, the following  -I
+option  tells  the assembler  to search  the include  directory on  the ram
+volume:
+
+    -I/ram/include
+
+1.4.2 The INCLUDE environment variable
+
+The INCLUDE environment  variable defines  a directory to  be searched  for
+instxt  files. The example  sets INCLUDE so that  the assembler will search
+for instxt files in the directory /ram/include :
+
+    set INCLUDE=/ram/include
+
+1.4.3 The search order
+
+Directories are searched in the following order:
+
+    1.  If the  instxt directive  delimited the  file name  with the double
+        quote character, ", the current  directory on the default drive  is
+        searched.  If delimited by angle brackets,  < and >, this directory
+        isn't automatically searched.
+
+    2.  The directories  defined in -I option  are searched,  in the  order
+        listed on the command line.
+
+    3.  The  directory  defined  in  the  INCLUDE  environment  varibale is
+        searched.
+
+ 2. ASSEMBLER OPTIONS
+
+The assembler supports the following options:
+
+    Option        Meaning
+
+    -O objname    Send object code to objname.
+    -L            Generate listing.
+    -C            Disable assembly of 65C02 instructions.  Not supported by
+                  asi.
+    -ZAP          Delete the source file after assembling it.
+
+ 3. PROGRAMMING INFORMATION
+
+This section discusses  the assembly language  that is supported  by as.  A
+description of the assembly language supported by asi is not available.
+
+as  supports  the  standard MOS  Technology  syntax: a  program  consist of
+sequence of statements, each of which is in the standard MOS Tech form; and
+the   assembler  supports   the  MOS   Tech  mnemonics   for  the  standard
+instructions. as  supports  some  of  the MOS  Tech  directives  and  their
+mnemonics; it also supports others, as defined below.
+
+The  following paragraphs define  in more detail  the language supported by
+as.
+
+3.1 Statement Syntax
+
+    [label] [opcode] [arguments] [[;]comment]
+
+where the brackets "[...]" indicate an optional element.
+
+3.2 Labels
+
+A  statement's label field defines a symbol to the assembler and assigns it
+a value. If present, the symbol name  begins in column one. If a  statement
+is  not  labeled, then  column  one must  be  blank, tab,  or  asterisk. An
+asterisk denotes a comment line.
+
+Normally, the symbol in a label field is assigned as its value the  address
+at  which the statement's  code will be placed.  However, the equ directive
+can be used to create  a symbol and assign it  some other value, such as  a
+constant.
+
+A  label can contain  up to 32  characters. Its first  character must be an
+alphabetic character or  one of  the special characters  '_' or  '.' .  Its
+other  characters can  be alphabetic  characters, digits,  '_', or  '.' . A
+label followed by '#' is declared external.
+
+The cc compiler places  a '_' character  at the end of  all labels that  it
+generates.
+
+3.3 Opcodes
+
+The assembler supports the standard MOS Tech instruction mnemonics for both
+the 6502  and 65C02  processors.  The directives  it supports  are  defined
+below.
+
+3.4 Arguments
+
+A  statement's argument  can specify  a register,  a memory  location, or a
+constant.
+
+A memory location can be referenced using any of the standard 6502 or 65C02
+addressing modes, and using the standard MOS Tech syntax.
+
+A  memory location reference or a  constant can be an expression containing
+any of the following operators:
+
+    *   multiply
+    /   divide
+    +   add
+    -   substract
+    #   constant
+    =   constant
+    <   low byte of expression
+    >   high byte of expression
+
+Expression  are  evaluated from  left  to right  with  no precedence  as to
+oprator or parantheses.
+
+3.5 Constants
+
+The  default  base  for  numeric  constants  is  decimal.  Other  bases are
+specified by the following prefixes or suffixes:
+
+    Base    Prefix    Suffix
+
+    2       %         b,B
+    8       @         o,O,q,Q
+    10      null,&    null
+    16      $         h,H
+
+A  character constant consist of the character, preceded by a single quote.
+For example: 'A .
+
+3.6 Directives
+
+The following paragraphs describe the directives that are supported by  the
+assembler.
+
+END              end
+
+    The end directive defines the end of the source statements.
+
+
+CSEG                       cseg
+
+    The  cseg  directive  selects  a  module's  code  segment:  information
+    generated  by statements that follow a  cseg directive is placed in the
+    module's code  segment, until  another segment-selection  directive  is
+    encountered.
+
+
+DSEG                       dseg
+
+    The  dseg  directive  selects  a  module's  data  segment:  information
+    generated  by statements that follow a  dseg directive is placed in the
+    module's data  segment, until  another segment-selection  directive  is
+    encountered.
+
+
+EQU              symbol    equ      <expr>
+
+    The equ directive creates a symbol named symbol (if it doesn't  already
+    exist), and assigns it the value of the expression expr.
+
+
+PUBLIC                     public   <symbol>[,<symbol>...]
+
+    The  public  directive  identifies  the  specified  symbols  as  having
+    external  scope. If  a specified symbol  was created  within the module
+    that's being assembled (by being defined in a statement's label field),
+    this  directive allows it to be accessed  by other modules. If a symbol
+    was  not  created  within  the  module  that's  being  assembled,  this
+    directive  tells the  assembler that  the symbol  was created  and made
+    public in another module.
+
+
+BSS                        bss      <symname>,<size>
+
+    The bss  directive creates  a symbol  named symname  and reserves  size
+    bytes  of space  for it in  the uninitialized data  segment. The symbol
+    cannot be accessed by other modules.
+
+
+GLOBAL                     global   <symname>,<size>
+
+    The  global directive creates a symbol named symname that other modules
+    can access using the global and public directives.
+
+    If other modules create symnam  using just the global directives,  then
+    symnam  will be located in a program's uninitialized data area. In this
+    case, the amount of space reserved  in this area for symnam will  equal
+    the largest value specified by the size fields in the global statements
+    that define symnam.
+
+    If other modules define in a public statement, but none of them  create
+    symnam  (by specifying it in a label  field), then symnam will still be
+    located in the uninitialized  data segment and  space will be  reserved
+    for it as defined above.
+
+    If  one of the modules both define  symnam using a public statement and
+    creates the symbol by specifying it in a label field, then symnam  will
+    be  located in the program's code or  data segment and no space will be
+    reserved for it in the uninitialized data segment.
+
+
+ENTRY                      entry    <symnam>
+
+    The  entry directive  defines the  symbol symnam  as being  a program's
+    entry point.
+
+    When a program is linked, the linker normally places a jump instruction
+    at  the  program's data  base  address. If  the  linker found  a module
+    containing an entry directive,  it sets the target  of the jump to  the
+    location  that was specified in the last entry directive that it found;
+    otherwise, it sets the  target to the beginning  of the program's  code
+    segment.
+
+
+FCB              [label]   fcb      &lt;value&gt;[,&lt;value&gt;...]
+
+    Each value in an fcb directive causes one or more bytes of memory to be
+    allocated  and then initialized  to the specified  value. The memory is
+    allocated in the currently active segment (code, or data, as defined by
+    the last segement-selection directive).
+
+
+FCC              [label]   fcc      "string"
+
+    The fcc  directive  allocates a  filed  that  has the  same  number  of
+    characters  as are  in string,  and places string  in it.  The field is
+    placed in the currently-active segment.
+
+
+RMB              [label]   rmb       &lt;expr&gt;
+
+    The rmb  directive  reserves  a  lield containing  expr  bytes  in  the
+    currently-active segment. The contents of the field is not defined.
+
+
+INSTXT                     instxt    &lt;file&gt;
+                           instxt    "file"
+                           instxt    /file/
+
+    The instxt directive causes  the assembler to  suspend assembly of  the
+    current  source file  and to assemble  the source that's  in file. When
+    done, the assembler will continue assembling the original file.
+
+    The assembler can serach for a file in several directories. If file  is
+    surrounded by quotes or by slashes, the assembler will begin the search
+    at the current directory; it  will search the directories specified  in
+    the  -I  option  and  the  INCLUDE  environment  variable.  If  file is
+    surrounded by <>,  the assembler will  search just the  -I and  INCLUDE
+    directories.
+</PRE></FONT><b> DIAGNOSTICS </b><br><br><PRE><FONT SIZE=2>
+If the  assembler fails  they return -1 as  there value that,  for example,
+tells shell-scripts to stop immediatly.
+</PRE></FONT><b> SEE ALSO </b><br><br>
+cc, ln, set
+
+<br>
+<br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=BYE></a><b> NAME bye</b><br><br>
+bye - exit to monitor
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+bye                                                  /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+bye tranfers control of the processor  to the Apple monitor program  that's
+in  ROM, by  jumping to  location $FF65.  To return  to the  SHELL from the
+monitor, enter the command
+
+        3D0G
+
+On machines having  the autostart ROM,  you can also  reenter the SHELL  by
+hitting the reset key.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=CAT></a><b> NAME cat</b><br><br>
+cat - catenate and print
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+cat [file] [file] ...                       /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+cat reads  each file  in sequence  and  writes it  to its  standard  output
+device.  If  no files  are  specified, cat  reads  from its  standard input
+device.
+
+Each argument can specify  a complete or partial  file name, in the  normal
+manner.
+
+By  default, cat's  standard input and  output devices are  assigned to the
+console. Either or both can also  be redirected to another device or  file,
+if desired, in the normal fashion.
+
+cat is a built-in SHELL command.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+cat hello.c
+    Writes hello.c to the screen.
+
+cat hello.c input.c &gt; cat.out
+    Writes hello.c and input.c to cat.out.
+
+cat
+    Copies typed characters to the screen.
+
+cat &gt; ../newfile
+    Copies typed characters to ../newfile.
+
+cat &lt; /stdio/printf.c &gt; tmp.c
+    Equivalent to cat /stdio/printf.c &gt; tmp.c
+</PRE></FONT><b> SEE ALSO </b><br><br>
+cp
+
+<br><br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=CC></a><b> NAME cc, cci, c65</b><br><br>
+cc, cci, c65 - Aztec C compilers
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+cc [-options] filename.c                      /* Apple // ProDOS utility */
+
+cci [-options] filename.c
+
+The 6502 compiler is named cc on native versions of Aztec C65 and c65 on
+cross development versions.
+
+Relocatable object files are named .r on the MS-DOS cross development version
+of Aztec C65.
+
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+cc translates C source code into native 6502 assembly language source code.
+cci  translates C source  code into assembly language  source for a "pseudo
+machine"; in an executable program,  cci-compiled code must be  interpreted
+by a special Aztec C routine.
+
+The compilers were implemented according to the language description in the
+Kernighan and Ritchie book "The C Programming Language".
+
+This description of the compilers is divided into three subsections:  which
+describe how to use the compilers, compiler options and error processing.
+
+To  the operator and programmer, the two compilers are very similar. In the
+discussion that follows, we will use  the name cc when describing  features
+that are common to both compilers. Where differences exist, we will say so.
+
+ 1. COMPILER OPERATING INSTRUCTIONS
+
+cc is invoked by a command of the form:
+
+    cc [-options] filename.c
+
+where [-options] specify optional parameters, and filename.c is the name of
+the file containing  the C  source program.  Options can  appear either  or
+after the name of the C source file.
+
+The compiler reads C source statements from the input file, translates them
+to assembly language source, and writes the result to another file.
+
+When the compiler is done, it by default activates the as assembler (cci by
+defaults  starts the asi assembler). The assemblers translates the assembly
+language source to relocatable  object code, writes  the result to  another
+file,  and deletes the  assembly language source file.  The -A option tells
+the compiler not to start the assembler.
+
+1.1 The C source file
+
+The extension on the source file  name is optional. If not specified,  it's
+assumed  to be .c .  For example, with the  following command, the compiler
+will assume the file name is text.c :
+
+    cc text
+
+The compiler will append .c to the source file name only if it does find  a
+period  in the file name. So if the  name of the source file really doesn't
+have an extension, you must compile it like this:
+
+    cc filename.
+
+The period in the name prevents the compiler from appending .c to the name.
+
+1.2 The ouput files
+
+1.2.1 Creating an object code file
+
+Normally,  when  you  compile  a  C  program  you  are  interested  in  the
+relocatable object code for the program,  and not in its assembly  language
+source.  Because  of this,  the compiler  by  defaults writes  the assembly
+language  source  for  a  C  program  to  an  intermediate  file  and  then
+automatically  starts  the  assembler. The  assembler  then  translates the
+assembly language source to relocatable object code, writes this code to  a
+file, and erases the intermediate file.
+
+By default, the object code generated by a cc-started assembly is sent to a
+file whose name is derived from that of the file containing the C source by
+changing  its  extension to  .o (the  default  extension for  a cci-started
+assembly is .i).  This file is  placed in the  directory that contains  the
+source file. For example, if the compiler is started with the command
+
+    cc prog.c
+
+the file prog.o will be created, containing the relocatable object code for
+the program.
+
+The  name  of   the  file  containing   the  object  code   created  by   a
+compiler-started  assembler  can  also  be  explicitly  specified  when the
+compiler is  started, using  the  compiler's -O  option. For  example,  the
+command
+
+    cc -O myobj.rel prog.c
+
+compiles  and assembles the C source that's in the file prog.c, writing the
+object code to the file myobj.rel .
+
+When the compiler  is going  to automatically  start the  assembler, it  by
+default  writes  the assembly  language source  to  a temporary  file named
+ctmpxxx.xxx, where the x's are  replaced by digits in  such a way that  the
+name  becomes  unique.  This  temporary file  is  placed  in  the directory
+specified by  the environment  variable CCTEMP.  If this  variable  doesn't
+exist, the file is placed in the directory specified by the current default
+prefix.
+
+When CCTEMP  exist,  the fully-qualified  name  of the  temporary  file  is
+generated  by  simply  prefixing its  value  to the  ctmpxxx.xxx  name. For
+example if CCTEMP has the value
+
+    /RAM/TEMP/
+
+then the temporary file is placed in the TEMP directory on the RAM volume.
+
+If you are interested in the  assembly language source, but still want  the
+compiler  to start the assembler, specify the  option -T when you start the
+compiler. This will cause the compiler to send the assembly language source
+to  a file  whose name is  derived from that  of the file  containing the C
+source by changing its extension to .asm . The C source statements will  be
+included  as commanets  in the assembly  language source.  For example, the
+command
+
+    cc -T prog.c
+
+compiles and assembles prog.c, creating the file prog.asm and prog.o .
+
+1.2.2 Creating just an assembly language file
+
+There  are  some  programs  for  which  you  don't  want  the  compiler  to
+automatically start the assembler. For example, you may want to modify  the
+assembly  language generated by  the compiler for  a particular program. In
+such cases, you can  use the compiler's -A  option to prevent the  compiler
+from starting the assembler.
+
+When  you compile a program using the  -A option, you can tell the compiler
+name and  location  of the  file  to which  it  should write  the  assembly
+language source, using the -O option.
+
+If  you don't use the  -O option but the -A  option, the compiler will send
+the assembly language source to a file  whose name is derived from that  of
+the C source file changing the extension to .asm and place this file in the
+same directory as the one that contains the C source file. For example, the
+command
+
+    cc -A prog.c
+
+compiles,  without assembling, the  C source that's  in prog.c, sending the
+assembly language source to prog.asm . As another example, the command
+
+    cc -A -O temp.a65 prog.c
+
+compiles, without assembling, the  C source that's  in prog.c, sending  the
+assembly language source to the file temp.a65 .
+
+When  the -A option is  used, the -T option  causes the compiler to include
+the C source statements as comments in the assembly language source.
+
+1.3 Searching for #include files
+
+You can  make the  compiler search  for  #include files  in a  sequence  of
+directories,  thus allowing source files and #include files to be contained
+in different directories.
+
+Directories can be  specified with  the -I  compiler option,  and with  the
+INCLUDE  environment variable. The compiler itself also selects a few areas
+to search. The maximum number of searched areas is eight.
+
+If the file name in the #include statement specifies a directory, just that
+directory is searched.
+
+1.3.1 The -I option
+
+A  -I option defines a single directory to be searched. The area descriptor
+follow the -I, with  no intervening blanks. For  example, the following  -I
+option  tells  the compiler  to  search the  include  directory on  the ram
+volume:
+
+    -I/ram/include
+
+1.3.2 The INCLUDE environment variable
+
+The  INCLUDE environment variable  also defines a  directory to be searched
+for #include files. For example, the following command sets INCLUDE so that
+the compiler will search for include files in the directory /ram/include:
+
+    set INCLUDE=/ram/include
+
+1.3.3 The search order for include files
+
+Directories are searched in the following order:
+
+    1.  If the #include  statement delimited the file  name with the double
+        quota character (") the current  directory on the default drive  is
+        searched.  If delimited  by angle  brackets (<  >) this  area isn't
+        automatically  searched.
+
+    2.  The directories  defined in -I  options are searched,  in the order
+        listed on the command.
+
+    3.  The  directory  defined  in  the  INCLUDE  environment  variable is
+        searched.
+
+ 2. COMPILER OPTIONS
+
+There  are two types  of options in Aztec  C compilers: machine independent
+and machine dependent. The machine-independent options are provided on  all
+Aztec C compilers. They are identified by a leading minus sign.
+
+The  Aztec  C  compiler for  each  target has  its  own, machine-dependent,
+options. Such are identified by a leading plus sign.
+
+The following  paragraphs first  summarize the  compiler options  and  then
+describe them in detail.
+
+2.1 Summary of options
+
+ 2.1.1 MACHINE-INDEPENDENT OPTIONS
+
+    -A                Don't start the assembler when compilation is done.
+
+    -Dsymbol[=value]  Define a symbol to the preprocessor.
+
+    -I dir            Search a directory named dir for #include files.
+
+    -O file           Send output to file.
+
+    -S                Don't print warning messages.
+
+    -T                Include C source statements  in the assembly language
+                      code  output  as  comments.  Each  source   statement
+                      appears before the assembly code it generates.
+
+    -B                Don't  pause after  every fifth  error to ask  if the
+                      compiler should continue.  See the Errors  subsection
+                      for details.
+
+    -Enum             Use an expression table having num entries.
+
+    -Lnum             Use an local table having num entries.
+
+    -Ynum             Use a case table having num entries.
+
+    -Znum             Use a literal table having num bytes.
+
+2.1.2 Special Options for the ProDOS compilers
+
+    +C                Generate 65C02 code (cc only).
+
+    +B                Don't generate the statement "public .begin".
+
+    +L                Turn automatic variables into statics (cc only).
+
+2.2 Detailed description of the options
+
+2.2.1 Machine-independent options
+
+2.2.1.1 The -D option (Define a macro)
+
+The  -D  option  defines a  symbol  in  the same  way  as  the preprocessor
+directive, #define. It's usage is as follows:
+
+    cc -Dmacro[=text] prog.c
+
+For example,
+
+    cc -DMAXLEN=1000 prog.c
+
+is  equivalent  to inserting  the following  line at  the beginning  of the
+program:
+
+    #define MAXLEN 1000
+
+Since the -D  option causes a  symbol to be  defined for the  preprocessor,
+this can be used in conjunction with the preprocessor directive, #ifdef, to
+selectively include code in a compilation. A common example is code such as
+following:
+
+    #ifdef DEBUG
+        printf ("value: %d\n", i);
+    #endif
+
+This  debugging code would be included  in the compiled source by following
+command:
+
+    cc -DDEBUG prog.c
+
+When no substitution text is specified,  the symbol is defined to have  the
+numerical value 1.
+
+2.2.1.2 The -I Option (Include another source file)
+
+The  -I option causes the  compiler to search in  a specified directory for
+files included in the  source code. The name  of the directory  immediately
+follows  the  -I, with  no intervening  spaces. For  more details,  see the
+Compiler Operating Instructions, above.
+
+2.2.1.3 The -S Option (Be silent)
+
+The compiler considers some  errors to be genuine  errors and others to  be
+possible errors. For the first type of error, the compiler always generates
+an error message. For  the second, it generates  a warning message. The  -S
+option causes the compiler to not print warning messages.
+
+2.2.1.4 The Local Symbol Table and the -L Option
+
+When  the compiler begins processing a compound statement, such as the body
+function or the body of a for loop, it makes entries about the  statement's
+local  symbols in the local  symbol table, and removes  the entries when it
+finishes processing the  statement. If  the table  overflows, the  compiler
+will display a message and stops.
+
+Be  default, the local symbol  table contains 40 entries.  Each entry is 26
+bytes long, thus by default the table contains 640 bytes.
+
+You can explicitly define the number  of entries in the local symbol  table
+using the -L option. The number of entries immediately follows the -L, with
+no  intervening spaces. For  example, the following  compilation will use a
+table of 75 entries, or almost 2000 bytes:
+
+    cc -L75 prog.c
+
+2.2.1.5 The Expression Table and the -E Option
+
+The compiler uses the expression table  to process an expression. When  the
+compiler  completes its processing of an  expression, it frees all space in
+this table, thus making  the entire table available  for the processing  of
+the  next expression. If the expression  table overflows, the compiler will
+generate error number 36, "no more expression space", and halt.
+
+By default, the  expression table  contains 80  entries. Each  entry is  14
+bytes long, thus by default the table contains 1120 bytes.
+
+You  can explicitly  define the number  of entries in  the expression table
+using the -E option. The number of entries immediately follows the -E, with
+no  intervening spaces. For  example, the following  compilation will use a
+table of 20 entries:
+
+    cc -E20 prog.c
+
+2.2.1.6 The Case Table and the -Y Option
+
+The compiler uses  the case  table to  process a  switch statement,  making
+entries  in  the table  for the  statement's cases.  When it  completes its
+processing of a switch statement, it frees up the entries for that  switch.
+If this table overflows, the compiler will display error 76 and halt.
+
+For  example, the following will use a  maximum of four entries in the case
+table:
+
+    switch (a)
+    {
+        case 0: a += 1;                      /* one */
+                break;
+        case 1: switch (x)                   /* two */
+                {
+                    case 'a': func1 (a);     /* three */
+                              break;
+                    case 'b': func2 (b);     /* four */
+                              break;
+                }                            /* release the last two */
+                a = 5;
+        case 3: func2 (a);                   /* total ends at three */
+                break;
+    }                                        /* release all entries */
+
+By default, the table contains 100 entries. Each entry is four bytes  long,
+thus by default, the table occupies 400 bytes.
+
+You can explicitly define the number of entries in the case table using the
+compiler's -Y option.  The number  of entries immediately  follows the  -Y,
+with  no intervening spaces. For example,  the following compilation uses a
+case table having 50 entries:
+
+    cc -Y50 file
+
+2.2.1.7 The String Table and the -Z Option
+
+When  the compiler encounters a "literal" (that is, a character string), it
+places the  string  in the  literal  table.  If this  table  overflow,  the
+compiler will display error 2, "string space exhausted", and halt.
+
+By default, the literal table contains 2000 bytes.
+
+You  can explicitly  define the  number of  bytes in  this table  using the
+compiler's -Z option. The number of bytes immediately follows the -Z,  with
+no intervening spaces. For example, the following command will reserve 3000
+bytes for the string table:
+
+    cc -Z3000 prog.c
+
+2.2.1.8 The Macro/Global Symbol Table
+
+The compiler stores information about a program's macro and global  symbols
+in  the Macro/Global  Symbol Table. This  table is located  in memory above
+all the other tables used  by the compiler. Its size  is set after all  the
+other  tables have been set.  and hence can't be set  by you. If this table
+overflows, the compiler will display the message "Out of Memory!" and halt.
+You  must recompile, using smaller sizes for the other tables or split your
+C source code.
+
+ 2.2.2 PRODOS OPTIONS
+
+2.2.2.1 The +C Option (Generate 65C02 code - cc only)
+
+The  +C option causes cc to generate  source for a 65C02 processor. If this
+option isn't used, cc will generate code for a 6502 processor.
+
+2.2.2.2 The +B Option (Don't generate reference to .begin)
+
+Normally when compiling a module, the compilers generate a reference to the
+entry  point named .begin . Then when  the module is linked into a program,
+the reference  causes the  linker to  include in  the program  the  library
+module that contains .begin .
+
+The +B option prevents the compilers from generating this reference.
+
+For example, if you want to provide your own entry point for a program, and
+its name isn't begin, you should compile the program's modules with the  +B
+option. If you don't, then the program will be bigger than necessary, since
+it will  contain your  entry  point module  and  the standard  entry  point
+module.  In  addition, the  linker by  default sets  at the  program's base
+adress a jump instruction to the program's entry points in several  module,
+it will set the jump to the last encountered.
+
+2.2.2.3 The +L Option (Turn Autos into Statics - cc only)
+
+The  +L option causes the  compiler to change the  class of variables whose
+class is automatic  to static.  This can  cause a  significant increase  in
+execution  speed, since it is faster  to adress static variables, which are
+directly addressable, than automatic variables, which are on the stack  and
+must be indirectly addressed.
+
+Automatic  variables that are declared using the auto keyword, (for example
+auto int i), aren't affected by the +L option: they will remain automatic.
+
+Also, if a register is available for an automatic variable that is declared
+using the register keyword (for example, register int i), the variable will
+be placed in a register and will not be turned into a static. If a register
+is  not available, however,  such a variable  will be turned  into a static
+variable.
+
+Like any other static  data, an auto-turned-static  is initialized to  zero
+before the program begins.
+
+A  function that recursively calls itself may  not work correcty when it is
+compiled with the +L option. For example, the following program will  print
+1  when compiled without the  +L option, and 100  when compiled with the +L
+option.
+
+    main ()
+    {
+        printf ("%d", qtest ());
+    }
+
+    qtest ()
+    {
+        int i;
+
+        if (++i < 100) qtest (i);
+        return (i);
+    }
+
+ 3. ERROR CHECKING
+
+Compiler errors come in two varieties  - fatal and not fatal. Fatal  errors
+cause  the compiler  to make  a final  statement and  stop. Running  out of
+memory and finding  no input are  examples of fatal  errors. The  non-fatal
+sort are introduced below.
+
+The  compiler will report  any error it  finds in the  source file. It will
+first print out a line of code, followed by a line containing the  up-arrow
+(caret)  character. The up-arrow in this  line indicates where the compiler
+was in the source line when it  detected the error. The compiler will  then
+display a line containing the following:
+
+    *   The name of the source file containing the line;
+    *   The number of the line within the file;
+    *   An error code;
+    *   The symbol with causes the error, when appropriate.
+
+The compiler  writes error  messages to  its standard  output. Thus,  error
+messages  normally  go to  the  console, but  they  can be  associated with
+another device  or a  file  by redirecting  standard  output in  the  usual
+manner. For example,
+
+    cc prog.c                 errors sent to the console;
+    cc prog.c &gt; outerr        errors sent to the file outerr.
+
+The compiler normally pauses after every  fifth error, and sends a  message
+to  its  standard output  asking you  want to  continue. The  compiler will
+continue only if you enter a line beginning with the character 'y'. If  you
+don't  want the  compiler to  pause in this  manner, (if,  for example, the
+compiler's standard output has  been redirected to a  file) specify the  -B
+option when you start the compiler.
+
+The  compiler is not always able to give a precise description of an error.
+Usally, it must proceed to the next  item in the file to ascertain that  an
+error  was encountered. Once  an error is  found, it is  not obvious how to
+interpret the subsequent code, since  the compiler cannot second-guess  the
+programmer's intentions. This may cause it to flag perfectly good syntax as
+an error.
+
+If errors arise at  compile time, it  is a general rule  of thumb that  the
+first error should be corrected first. This may clear up some of the errors
+which follow. If the compiler detects  more error with the same symbol,  it
+maybe is only one error (for example, a variable is not declared).
+
+The  best way to  attack an error  is first to  look up the  meaning of the
+error code.
+</PRE></FONT><b> DIAGNOSTICS </b><br><br><PRE><FONT SIZE=2>
+If the compilation fails the compilers  return -1 as there value that,  for
+example, tells shell-scripts to stop immediatly.
+</PRE></FONT><b> SEE ALSO </b><br><br>
+as, err, ln, set
+
+<br>
+<br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br>
+<HR><a name=CD></a><b> NAME cd</b><br><br>
+cd - change current directory
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+cd [directory]                              /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+cd makes cirectory the current directory. If directory isn't specified, the
+current  directory  is set  to  the directory  that's  defined in  the HOME
+environment variable, if this variable exist.
+
+If  the  specified  directory  doesn't  exist,  the  current  directory  is
+unchanged.
+
+The directory argument defines the path of directories which must be passed
+trough to reach the new directory. The path can define a complete path from
+the  root directory or  it can define  a partial path,  which is assumed to
+begin at the current directory.
+
+cd is a built-in SHELL command.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+cd /work/io
+    The directory /work/io is made the current directory.
+
+cd subs/io
+    The directory  io,  which is  reached  from the  current  directory  by
+    passing through the subdirectory subs of the current directory and then
+    into io, is made the current  directory. For example, if /work was  the
+    current  directory, then  after this  command /work/subs/io  is the new
+    current directory.
+
+cd ..
+    The  current directory is set to  the parent directory of the directory
+    which was the current before the issuance of this command.
+
+cd ../include
+    The  current  directory is  set to  the directory  which is  reached by
+    passing through the parent directory of the directory which was current
+    before the issuance of this command and then its include subdirectory.
+
+cd ../..
+    The current  directory is  set to  the directory  which is  reached  by
+    passing through the parent directory of the directory which was current
+    before the issuance of this command and then to its parent directory.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=CMP></a><b> NAME cmp</b><br><br>
+cmp - file comparison utility
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+cmp [-l] file1 file2                        /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+cmp compares two files an a  character-by-character basis. When it finds  a
+difference,  it displays a message, giving the offset from the beginning of
+the file.
+
+If the -l  option isn't specified,  the program will  stop after the  first
+difference, displaying a message in the format:
+
+        Files differ: character 10
+
+If  the  -l option  is specified,  cmp  will list  all differences,  in the
+format:
+
+        decimal-offset hex-offset file1-value file2-value
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+cmp otst ntst
+    Files differ: character 10
+
+cmp -l otst ntst
+     10 a:  00 45
+    100 64: 1A 23
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=CNM></a><b> NAME cnm</b><br><br>
+cnm - display object file info
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+cnm [-sol] file [file ...]                           /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+cnm displays the size and symbols  of its object file arguments. The  files
+can  be object modules  created by the  as or asi  assemblers, libraries of
+object modules created by the lb librarian, and 'rsm' files created by  the
+ln linker during the linking of an overlay root.
+
+For  example, the  following displays the  size and symbols  for the object
+module sub1.o, the library c.lib, and the 'rsm' file root.rsm:
+
+        cnm sub1.o c.lib root.rsm
+
+By default, the information is sent to the console. It can be redirected to
+a  file or device  in the normal  way. For example,  the following commands
+send information about sub1.o to the display and to the file dispfile:
+
+        cnm sub1.o
+        cnm sub1.o > dispfile
+
+The first line listed by cnm for an object module has the following format:
+
+        file (module): code:cc  data:dd  udata:uu  total:tt(0xhh)
+
+where
+
+        * file is the name of the file containing the module.
+        * module is the name of the  module; if the module is unamed,  this
+          field and its surrounding parentheses aren't printed.
+        * cc  is the  number of  bytes  in the  module's code  segment,  in
+          decimal.
+        * dd  is the  number  of bytes  in  the module's  initialized  data
+          segment  in decimal. * uu is the  number of bytes in the module's
+          uninitialized data segment, in decimal.
+        * tt is the total number of  bytes in the module's three  segments,
+          in decimal.
+        * hh is the total number of  bytes in the module's three  segments,
+          in hexadecimal.
+
+If cnm displays information  about more than one  module, it displays  four
+totals  just  before it  finishes,  listing the  sum  of the  sizes  of the
+modules' code segments, initialized  data segments, and uninitialized  data
+segments, and the sum of the sizes of all segments of all modules. Each sum
+is in decimal, the total of all segments is also given in hexadecimal.
+
+The -s option tells cnm to display just the sizes of the object modules. If
+the  option isn't specified, cnm also displays information about each named
+symbol in the object modules.
+
+When cnm  displays information  about the  module's named  symbols, the  -l
+option  tells cnm to  display each symbol's information  on a seperate line
+and to display all  of the characters  in a symbol's  name. If this  option
+isn't  used, cnm displays  the information about several  symbols on a line
+and only displays the first eight characters of a symbol's name.
+
+The  -o option tells cnm to prefix each line generated for an object module
+with the name  of the file  containing the  module and the  module name  in
+parentheses  (if the module is named). If this option isn't specified, this
+information is listed just once for each module: prefixed to the first line
+generated for the module.
+
+The  -o  option is  useful when  using  cnm in  combination with  grep. For
+example, the  following commands  will display  all information  about  the
+module perror in the library c.lib:
+
+        cnm -o c.lib > tmp
+        grep perror tmp
+
+cnm displays information about  an module's named  symbols, that is,  about
+the  symbols that begin with something other than a dollar sign followed by
+a digit. For  example, the symbol  quad is named,  so information about  it
+would  be displayed, the  symbol .0123 is unnamed,  so information about it
+would not be displayed.
+
+For each named symbol in a module, cnm displays its name, a two-  character
+code  specifying its  type, and  an associated  value. The  value displayed
+depends on the type of the symbol.
+
+If the first character of  a symbol's type code  is lower case, the  symbol
+can  only be accessed by the module, that  is, it's local to the module. If
+this character is upper  case, the symbol is  global to the module:  either
+the  module has defined the symbol and  is allowing other modules to access
+it ar the module  needs to access  the symbol, which must  be defined as  a
+global or public symbol in another module. The type codes are:
+
+        ab    The  symbol  was   defined   using  the   assembler's  EQUATE
+              directive, The  value  listed is  the  equated value  of  its
+              symbol.
+
+              The compile doesn't generate symbols of this type.
+
+        pg    The symbol is in the code segment. The value is the offset of
+              the symbol within the code segment.
+
+              The compiler generates this  type symbol for function  names.
+              Static  functions are local to the function, and so have type
+              pg, all other  functions are global,  that is, callable  from
+              other programs, and hence have type Pg.
+
+        dt    The symbol is in  the initialized  data segment. The value is
+              the offset of the symbol from the start of the data segment.
+
+              The compiler generates symbols  of this type for  initialized
+              variables  which  are declared  outside any  function. Static
+              variables are local to the program  and so have type dt,  all
+              other  variables are  global, that is,  accessable from other
+              programs, and hence have type Dt.
+
+        ov    When an overlay is being linked and that overlay itself calls
+              another  overlay, this tpe of symbols can appear in the 'rsm'
+              file for the overlay that is being linked. It indicates  that
+              the  symbol is defined  in the program that  is going to call
+              the overlay that is being linked.
+
+              The  value is the offset of  the symbol from the beginning of
+              the physical segment that contains it.
+
+        un    The symbol is used but  not defined  within the  program. The
+              value has no meaning.
+
+              In   assembly  language  terms,  a  type  of  Un  (the  U  is
+              capitalized) indicates that  the symbol is  the operand of  a
+              public  directive and  that it  is perhaps  referenced in the
+              operand field of some statements, but that the program didn't
+              create the symbol in a statement's label field.
+
+              The  compiler  generates Un  symbols  for functions  that are
+              called but not defined within the program, for variables that
+              are  declared to be extern and  that are actually used within
+              the program,  and  for  uninitialized,  global  dimensionless
+              arrays.  Variables which are declared  to be extern but which
+              are not  used  within the  program  aren't mentioned  in  the
+              assembly  language source file generated  by the compiler and
+              hence don't appear in the object file.
+
+        bs    The symbol is in the uninitialized data segment. The value is
+              the space reserved for the symbol.
+
+              The  compiler generates bs  symbols for static, uninitialized
+              variables which are declared outside all functions and  which
+              aren't dimensionless arrays.
+
+              The  assembler generates bs symbols for symbols defined using
+              the bss assembler directive.
+
+        Gl    The symbol is in the uninitialized data segment. The value is
+              the space reserved for the symbol.
+
+              The   compiler   generates   Gl   symbols   for   non-static,
+              uninitialized  variables  which  are  declared  outside   all
+              functions and which aren't dimensionless arrays.
+
+              The  assembler  generates Gl  symbols for  variables declared
+              using the global directive which have a non- zero size.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=CP></a><b> NAME cp</b><br><br>
+cp - copy files
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+cp [-f] infile outfile                      /* Apple // and UNIX utility */
+
+cp [-f] file1 [file2 ...] dir
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+cp copies files, and  their attributes. The first  form of the command,  as
+shown  above, copies infile to outfile. The second copies file1, file2, ...
+into the directory named dir.
+
+The -f option causes cp to  automatically overwrite any existing files.  If
+this  option isn't specified and if a file to be created already exists, cp
+will ask if you want it overwritten.
+
+On an Apple // cp is a built-in SHELL command.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+The following  command copies  the  file hello.c  that  is in  the  current
+directory to the file newfile.c in the /source directory:
+
+        cp hello.c /source/newfile.c
+
+The next command copies all ".c" files in the /arc directory to the current
+(ie, the ".") directory:
+
+        cp /arc/*.c .
+</PRE></FONT>
+<b> SEE ALSO </b><br><br>
+chmod, lock, unlock
+
+<br>
+<br>
+<b> BUGS </b><br><br><PRE><FONT SIZE=2>
+cp doesn't copy read-protected files. It only creates them.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=CRC></a><b> NAME crc</b><br><br>
+crc - Utility for generating the CRC for files
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+crc file1 file2 ...                         /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+crc computes a number, called the CRC, for the specified files.
+
+The CRC for a file is entirely dependent on the file's contents, and it  is
+very  unlikely that  two files whose  contents are different  will have the
+same CRCs.  Thus, crc  can be  used to  determine whether  a file  has  the
+expected contents.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+As  an example of the usage of  crc, the following command computes the crc
+of all files whose extension is .c:
+
+        crc *.c
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=DAT></a><b> NAME date</b><br><br>
+date - display date and time
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+date                                                 /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+Displays the date and time.
+
+date is a built-in SHELL command.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=DEB></a><b> NAME debug</b><br><br>
+debug - set debug mode
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+debug                                                /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+To debug a SHELL-activated program using the monitor program That's in ROM,
+first  enter the  debug command,  and then enter  the command  to start the
+program. The SHELL will load the program, perform i/o redirection and  pass
+arguments to it if necessary, then, when it sees that the debug command was
+entered, it will jump to the monitor.
+
+When you're done debugging return to the SHELL by entering the command:
+
+        3D0G
+
+The debug command affects only the next program that the SHELL starts. That
+is, for each program that you want to debug, you must first enter the debug
+command and then enter the command to start the program.
+
+debug is a built-in SHELL command.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=DF></a><b> NAME df</b><br><br>
+df - display volume info
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+df [/vol]                                            /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+Displays information about disk space utilization.
+
+The optional parameter  /vol defines the  disk of interest.  It can be  the
+name  of a file or directory. In  this case, information is displayed about
+the disk that contains the specified file or directory.
+
+/vol can  also  be  the  single character  '/'  (ie,  specify  the  SHELL's
+simulated  root  directory  of  the  entire  file  system).  In  this case,
+information is displayed about all on-line disks.
+
+If /vol isn't specified, and if  the current directory isn't the  simulated
+root  directory of the file system, information is displayed about the disk
+that contains the current directory.
+
+If /vol isn't specified, and if the current directory is the simulated root
+directory  of the file  system, information is  displayed about all on-line
+disks.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+The following command displays information about the disk that contains the
+current directory:
+
+        df
+
+The next command displays information about the /ram disk:
+
+        df /ram
+
+The next command displays information about all on-line disks:
+
+        df /
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=DIF></a><b> NAME diff</b><br><br>
+diff - source file comparison utility
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+diff [-b] file1 file2                       /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+diff is  a program,  similar to  the UNIX  program of  the same  name,  hat
+determines  the  difference between  two files  containing text.  file1 and
+file2 are the names of the files to be compared.
+
+ 1. THE -B OPTION
+
+    The  -b option causes diff to  ignore trailing blanks (spaces and tabs)
+    and to consider strings of blanks to be identical. If this option isn't
+    specified,  diff considers two lines to be  the same only if they match
+    exactly.
+
+    diff will never consider blanks to match a null string, regardless of
+    whether -b was used or not.
+
+ 2. THE CONVERSION LIST
+
+    diff writes, to its standard output, a "conversion list" that describes
+    the changes that need to be made to file1 to convert it into file2. The
+    list is organized into a sequence of items, each of which describes one
+    operation that must be performed on file1.
+
+2.1 Conversion Items
+
+    There are three types of operations that can be specified in a
+    conversion list item:
+
+        *    adding lines to file1 from file2;
+        *    deleting lines from file1;
+        *    replacing (changing) file1 lines with file2 lines.
+
+    A conversion list item consists a letter describing the operation to be
+    performed:  'a' for  adding lines, 'd'  for deleting line,  and 'c' for
+    changing lines.
+
+    Preceding and following  the letter  are the  numbers of  the lines  in
+    file1  and file2, respectively, that are  affected by the command. If a
+    range of lines in  a file are affected,  just the beginning and  ending
+    line numbers are listed, seperated by a comma.
+
+    So one line of the output of diff will look like
+
+        file1line [,file1to] [letter] file2line [,file2to]
+        [><] diffline
+
+2.1.2 The affected lines
+
+    As mentioned above, the lines affected by a conversion item's operation
+    are listed after the item's command line. The affected lines from file1
+    are listed first, flagged with a  preceding '<'. The come the  affected
+    lines  from file2,  flagged with a  preceding '>'. The  file1 and file2
+    lines are seperated by the line ---.
+
+    Since no lines  from file1 are  affected by an  'add' conversion  item,
+    only  the file2 lines that  will be added to  file1 are listed, and the
+    seperator line '---' is omitted.
+
+ 3. DIFFERENCES BETWEEN THE UNIX AND MANX VERSION OF DIFF
+
+    The Manx und UNIX versions of  diff are actually most similar when  the
+    latter  program is invoked  with the -h  option. As with  the UNIX diff
+    when used with  the -h option,  the Manx diff  works best when  changed
+    stretches  are  short  and  well  sperated,  and  works  with  files of
+    unlimited length.
+
+    Unlike the UNIX diff, the Manx  diff doesn't support the options e,  f,
+    or  h and requires that both operands  to diff be actual files. Because
+    of this, the Manx version of  diff doesn't support the features of  the
+    UNIX  version  which allows  one operand  to be  a directory  name, (to
+    specify a file  in that  directory having the  same name  as the  other
+    operand),  and which  allows one operand  to be '-'  (to specify diff's
+    standard input instead of a file).
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=ECH></a><b> NAME echo</b><br><br>
+echo - echo arguments
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+echo [arg1] [arg2] ...                               /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+echo writes its arguments, seperated by blanks and terminated by a newline,
+to its standard output device.
+
+The  ouput thus goes, by default, to  the screen. It can also be redirected
+to another device or file in the normal manner.
+
+echo is a built-in SHELL command.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br>
+<HR><a name=GRE></a><b> NAME grep</b><br><br>
+grep - pattern-matching program
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+grep [-cflnv] pattern [files]               /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+grep is a  program, similar  to the  UNIX program  of the  same name,  that
+searches  files for lines containing a  pattern. By default, such lines are
+written to grep's standard output.
+
+ 1. INPUT FILES
+
+    The files parameter is a list of files to be searched. If no files  are
+    specified, grep searches its standard input. Each file name can specify
+    a single file to be searched.
+
+ 2. OPTIONS
+
+    The following options are supported:
+
+        v    print all lines that don't match the pattern
+
+        c    print just the  name of  each file  and the number of matching
+             lines that it contained
+
+        l    print the names of just the files that contain matching lines
+
+        n    precede each matching line that's printed by its relative line
+             number within the file that contains it
+
+        f    a character in the pattern will match both its upper and lower
+             case equivalent
+
+ 3. PATTERNS
+
+    A  pattern  consists  of  a  limited  form  of  regular  expression. It
+    describes a set of character strings, any of whose members are said  to
+    be matched by the regular expression.
+
+    Some  patterns  match  just  a single  character,  others,  which match
+    strings, can be constructed from those that match single characters. In
+    the  following paragraphs, we'll first describe the patterns that match
+    a single character, and  then describe patterns  that match strings  of
+    characters.
+
+3.1 Matching single characters
+
+    The patterns that match a single character are these:
+
+        *    an ordinary  character (that  is,  one other  than the special
+             characters described below) matches itself
+
+        *    a period (.)  is a  pattern that matches any  character except
+             newline.
+
+        *    a non-empty string of  characters enclosed in square brackets,
+             [], matches aby one character in that string
+
+             If the string begins with the caret character,(^), the regular
+             expression matches  any character  except the  other  enclosed
+             characters  and newline. The '^' has this special meaning only
+             if its the first character of the string.
+
+             The minus character, (-), can be  used to indicate a range  of
+             consecutive   ASCII  characters  (   [0-9]  is  equivalent  to
+             [0123456789] ).
+
+        *    A backslash, (\), followed  by a special character matches the
+             special character itself. The special characters are:
+
+                .,  *, [, and \, which are always special, except when they
+                appear in square backets, ([]).
+
+                caret, (^), which is special when it is at the beginning of
+                an entire regular expression (as discussed in 3.4) and when
+                it immediately  follows  the  left  of  a  pair  of  square
+                brackets.
+
+                $,  which  is  special  at the  end  of  an  entire regular
+                expression (discussed in 3.4).
+
+3.2 Matching character string
+
+    Patterns can  be  concatenated. In  this  case, the  resulting  pattern
+    matches  strings  whose  substrings  match  each  of  the  concatenated
+    patterns.
+
+3.3 Matching repeating characters
+
+    A pattern can be built by appending an asterick, (*), to a pattern that
+    match  a single character.  The resulting pattern  matches zero or more
+    occurences of the single-character pattern.
+
+3.4 Matching strings that begin or end lines
+
+    An entire pattern may  be constrained to  match only character  strings
+    that  occur at  the beginning  or the  end of  a line,  by beginning or
+    ending the pattern with the character '^' or '$', respectively.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+4.1 Simple string matching
+
+    The following command will search the files file1.txt and file2.txt and
+    print the lines containing the word heretofore:
+
+        grep heretofore file1.txt file2.txt
+
+    If you aren't interested in the specific lines of these files, but just
+    want to know the names of the file containing the word heretofore,  you
+    could enter
+
+        grep -l heretofore file1.txt file2.txt
+
+    The  above  two  examples  ignore lines  in  which  heretofore contains
+    capital letters,  such as  when  it begins  a sentence.  The  following
+    command will cover this situation:
+
+        grep -lf heretofore file1.txt file2.txt
+
+    grep processes  all  option  at  once,  so  multiple  options  must  be
+    specified in one dash parameter. For example, the command
+
+        grep -l -f heretofore file1.txt file2.txt
+
+    won't work.
+
+4.2 The special character '.'
+
+    Suppose  you want to find  all lines in the  file prog.c that contain a
+    four-character string whose first and last characters are 'm' and  'n',
+    respectively,  and  whose other  characters you  don't care  about. The
+    command
+
+       grep m..n prog.c
+
+    will do the trick, since the  special character '.' matches any  single
+    character.
+
+4.3 The backslash character
+
+    There  are occasions when you want to find the character '.' in a file,
+    and don't want grep to consider it to be special. In this case, you can
+    use  the backslash character,  (\), to turn off  the special meaning of
+    the next character.
+
+    For example,  suppose  you  want  to find  all  lines  containing  .PP.
+    Entering
+
+        grep .PP prog.doc
+
+    isn't  adequate, because it will find  lines such as THE APPLICATION OF
+    since the '.' matches the letter 'A'. But if you enter
+
+        grep /.PP prog.doc
+
+    grep will print just what you want.
+
+    The backslash character can be used to turn off the special meaning of
+    any special character. For example,
+
+        grep \\n prog.c
+
+    finds all lines in prog.c containing the string '\n'.
+
+4.4 The dollar sign and caret ($ and ^)
+
+    Suppose you want to find the number of the line on which the definition
+    of the function add occure in the file arith.c. Entering
+
+        grep -n add arith.c
+
+    isn't good,  because it  will print  lines in  which add  is called  in
+    addition  to the line you're interested in. Assuming that you begin all
+    function definitions at the beginning of a line, you could enter
+
+        grep ^add arith.c
+
+    to accomplish purpose.
+
+    The character '$' is a companion to '^', and stands for 'the end of the
+    line'. So if you  want to file  all lines in file.doc  that end in  the
+    string time, you could enter
+
+        grep time$ file.doc
+
+    And the following will finds all lines that contain just .PP:
+
+        grep ^\.PP$
+
+4.5 Using brackets
+
+    Suppose  that you  want to  find all  lines in  the file  file.doc that
+    begins with a digit. The command
+
+        grep ^[0123456789] file.doc
+
+    will do just that. This command can be abbreviated as
+
+        grep ^[0-9] file.doc
+
+    And if you wanted to print all lines that don't begin with a digit, you
+    could enter
+
+        grep ^[^0-9] file.doc    or
+        grep -v ^[0-9] file.doc
+
+4.6 Repeated characters
+
+    Suppose you want  to find  all lines in  the file  prog.c that  contain
+    strings  whose first character is 'e'  and whose last character is 'z'.
+    The command
+
+        grep e.*z prog.c
+
+    will do that. The  'e' matches an  'e', the '.*'  matches zero or  more
+    arbitrary characters, and the 'z' matches a 'z'.
+
+ 5. DIFFERENCES BETWEEN THE MANX AND UNIX VERSION OF GREP
+
+    The Manx and UNIX version of grep differ in the options they accept and
+    the patterns they match.
+
+5.1 Option differences
+
+    The option -f is supported only by the Manx grep.
+    The option -b and -s are supported only by the UNIX grep.
+
+5.2 Pattern differences
+
+    Basically, the patterns accepted by the Manx grep are a subset of those
+    accepted by the UNIX grep.
+
+    The Manx grep doesn't allow a regular expression to be surrounded by
+    '\(' and '\)'.
+
+    The Manx grep doesn't accept the construct '\{m\}'.
+
+    The Manx  grep doesn't  allow a  right bracket,  ']', to  be  specified
+    within brackets.
+
+    Quoted strings can't be passed to the Manx grep. For example, the Manx
+    grep won't accept
+
+        grep 'this is a fine kettle of dish' file.doc
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=HD></a><b> NAME hd</b><br><br>
+hd - hex dump utility
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+hd [-r] [+n[.]] file1 ...                            /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+hd displays the  contents of  one or  more files in  hex and  ascii to  its
+standard output.
+
+file1, file2, ... are the names of the files to be displayed.
+
++n  specifies the offset into  the file where the  display is to start, and
+defaults to the beginning of the file.
+
+if +n  is followed  by a  period,  n is  assumed to  be a  decimal  number,
+otherwise,  it's  assumed to  be hexdecimal.  Each  file will  be displayed
+beginning at the last specified offset.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+hd +16b oldtest newtest +0 junk
+
+    Displays  the data forks of the files oldtest and newtest, beginning at
+    offset 0x16b, and of the file names junk beginning at its first byte.
+
+hd -r +1000. tstfil
+
+    Displays the contents of the resource fork of tstfil, beginning at byte
+    1000.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=LB></a><b> NAME lb</b><br><br>
+lb - object file librarian
+<br><br>
+<b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+lb library [options] [mod1 mod2 ...]                 /* Apple // utility */
+
+Relocatable object files are named .r on the MS-DOS cross development version
+of Aztec C65.
+
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+lb is a program that creates  and manipulates libraries of object  modules.
+The modules must have been created by the Manx assembler.
+
+ 1 THE ARGUMENTS TO LB
+
+1.1 The library arguments
+
+    When started, lb acts upon a single library file. The first argument to
+    lb (library, in the  synopsis) is the name  of this file. The  filename
+    extension for library is optional, if not specified, it's assumed to be
+    .lib.
+
+1.2 The option argument
+
+    There are  two types  of option  argument: function  code options,  and
+    qualifier  options. These options  will be summarized  in the following
+    paragraphs, and then described in detail below.
+
+1.2.1 Function code options
+
+    When lb is started, it performs one function on the specified  library,
+    as  defined by the options argument. The functions that lb can perform,
+    and their corresponding option code, are:
+
+        Function                         Code
+
+        create a library                 (no code)
+        add modules to a library         -a, -i, -b
+        list library modules             -t
+        move library within a library    -m
+        replace modules                  -r
+        delete modules                   -d
+        extract modules                  -x
+        ensure modules uniqueness        -u
+        help                             -h
+
+    In the synopsis, the options argument is surrounded by square brackets.
+    This  indicates  that  the  argument  is  optional,  if  a  code  isn't
+    specified, lb assumed that a library is to be created.
+
+1.2.2 Qualifier options
+
+    In addition to a  functions code, the  options argument can  optionally
+    specify  a qualifier, that  modifies lb's behavior  as it is performing
+    the requested function. The qualifiers and their codes are:
+
+        verbose                          -v
+        silent                           -s
+
+    The  qualifier can  be included  in the  same argument  as the function
+    code, or as a seperate argument.
+
+1.3 The mode arguments
+
+    The  arguments mod1, mod2, etc are the  names of the object modules, or
+    the files  contianing  these modules,  that  lb  is to  use.  For  some
+    functions,  lb  requires  an  object module  name,  and  for  others it
+    requires the name of a file containing and object module. In the latter
+    case,  the file's extension  is optional, if  not specified, lb assumes
+    that it's .o.
+
+1.4 Reading arguments from another file
+
+    lb has a special argument, -f filename, that causes it to read  command
+    line arguments from the specified file. When done, it continues reading
+    arguments from the command line. Arguments  can be read from more  than
+    one file, but the file specified in a -f filename argument can't itself
+    contain a -f filename argument.
+
+ 2. BASIC FEATURES OF LB
+
+    In this section we want to describe tha basic features of lb. With this
+    knowledge in hand, you can start using lb, and then read about the rest
+    of the features of lb at your leisure.
+
+    The basic  things  you  need to  know  about  lb, and  which  thus  are
+    described in this section, are:
+
+        *    How to create a library
+        *    How to list the name of modules in a library
+        *    How modules get their names
+        *    Order of modules in a library
+        *    Getting lb arguments from a file
+
+2.1 Creating a library
+
+    A  library is created by starting lb with a command line that specifies
+    the name of the library file to  be created and the names of the  files
+    whose  object modules  are to  be copied  into the  library. It doesn't
+    contain a function code, and it's this absence of a function code  that
+    tells lb that it is to create a library.
+
+    An  object module file from  which modules are read  into a new library
+    can itself be a library created by lb. In this case, all the modules in
+    the library are copied into the new library.
+
+2.1.1 The temporary library
+
+    When  lb creates  a library or  modifies an existing  library, it first
+    creates a  new library  with  a temporary  name.  If the  function  was
+    successful  performed, lb erases  the file having the  same name as the
+    specified library, and then renames the new library, giving it the name
+    of  the specified library. Thus, lb makes  sure it can create a library
+    before erasing an existing one.
+
+    Note that there must be room on  the disk for both the old library  and
+    the new.
+
+2.2 Getting the table of contents for a library
+
+    To list the names of the modules in a library, use lb's -t option.  The
+    list  will include some  **DIR** entries. These  identify blocks within
+    the library tthat  contain control  information. They  are created  and
+    deleted automatically as needed, and cannot be changed by you.
+
+2.3 How modules get their names
+
+    When  a module is copied into a library from a file containing a single
+    object module  (that  is, from  object  module generated  by  the  Manx
+    assembler),  the name of the module  within the library is derived from
+    the name of the  input file by deleting  the input file's volume,  path
+    and  extension components.  An input file  can itself be  a library. In
+    this case, a module's name in the  new library is the same as its  name
+    in the input library.
+
+2.4 Order in a library
+
+    The  order of modules in a library is important, since the linker makes
+    only a single pass through a library when it is searching for  modules.
+    When  lb creates  a library,  it places modules  in the  library in the
+    order in which it reads them.
+
+    The ord utility program can be  used to create a library whose  modules
+    are optionally sorted.
+
+
+2.5 Getting lb arguments from a file
+
+    For libraries containing many  modules, it is frequently  inconvenient,
+    if not impossible, to enter all the arguments to lb on a single command
+    line. In this case,  lb's -f filename  feature can be  of use: when  lb
+    finds  this  option, it  opens the  specified  file and  starts reading
+    command arguments from  it. After  finshing the file,  it continues  to
+    scan the command line.
+
+    Arguments  in a -f file can be  seperated by any sequence of whitespace
+    characters ('whitespace'  being  blanks,  tabs,  and  newlines).  Thus,
+    arguments in a -f file can be on seperate lines, if desired.
+
+    The  lb command  line can  contain multiple  -f arguments,  allowing lb
+    arguments to be  read from  several files. A  -f file  can contain  any
+    valid  lb  argument, except  another  -f. That  is,  -f files  can't be
+    nested.
+
+ 3. ADVANCED LB FEATURES
+
+3.1 Adding modules to a library
+
+    lb allows you to add modules to an existing library. The modules can be
+    added before or after a specified module in the library or can be added
+    to the beginning or end of the library.
+
+    The options that select lb's add function are:
+
+        Option       Function
+
+        -b target    add modules before the module target
+        -i target    same as -b target
+        -a target    add modules after the module target
+        -b+          add modules to the beginning of the library
+        -i           +same as -b+
+        -a           +add modules to the end of the library
+
+    In any lb command that selects the add function, the name of the  files
+    containing  modules to  be added follows  the add option  code (and the
+    target module  name, when  appropriate). A  file can  contain a  single
+    module or a library of modules.
+
+    Modules are addes in the order that they are specified. If a library is
+    to be added, its modules are added in the order they occur in the input
+    library.
+
+3.2 Moving modules within a library
+
+    Modules  which already  exist in a  library can be  easily moved about,
+    using the move option, -m.
+
+    As with the option for adding modules to an existing library, there are
+    several forms of move functions:
+
+        Option       Meaning
+
+       -mb target    move modules before the module target
+       -ma target    move modules after the module target
+       -mb+          move modules to the beginning of the library
+       -ma+          move modules to the end of the library
+
+    In the lb command,  the names of  the modules to  be moved follows  the
+    'move' option code.
+
+    The  modules are  moved in  the order  in which  they are  found in the
+    original library, not in the order in  which they are listed in the  lb
+    command.
+
+3.3 Deleting modules
+
+    Modules can be deleted from a library using lb's -d option. The command
+    for deletion has the form
+
+        lb libname -d mod1 mod2 ...
+
+    where mod1, mod2, ... are names of the modules to be deleted.
+
+3.4 Replacing modules
+
+    The lb option 'replace' is used to replace one module in a library with
+    one or more other modules.
+
+    The 'replace' option has the form
+
+        lb libname -r target
+
+    where  target is the  name of the  module being replaced.  In a command
+    that  uses the 'replace'  option, the names of  the files whose modules
+    are to replace the  target module follow the  'replace' option and  its
+    associated  target module. Thus, an lb  command to replace a module has
+    the form:
+
+        lb library -r target mod1 mod2 ...
+
+3.5 Uniqueness
+
+    lb allows libraries to be  created containing duplicate modules,  where
+    one module is a duplicate of another if it has the same name.
+
+    The  option  -u causes  lb to  delete duplicate  modules in  a library,
+    resulting in  a  library  in  which each  module  name  is  unique.  In
+    particular,  the -u option causes lb to scan through a library, looking
+    at module  names. Any  modules found  that are  duplicates of  previous
+    modules are deleted.
+
+3.6 Extracting modules from a library
+
+    The  lb option  -x extracts  modules from  a library  and puts  them in
+    sperated files, without modifying the library.
+
+    The names of the modules to be  extracted follows the -x option. If  no
+    modules are specified, all modules in the library are extracted.
+
+    When  a module is extracted,  it's wriiten to a  new file, the file has
+    the same name as the module and extension .o.
+
+3.7 The 'verbose' option
+
+    The 'verbose' option, -v, causes lb to be verbose, that is, to tell you
+    what  it's  doing. This  option  can be  specified  as part  of another
+    option, or all by itself.
+
+3.8 The 'silence' option
+
+    The 'silence' option, -s, causes lb to not display its signon  message.
+    This  option is especially useful when redirecting the output of a list
+    command to a disk file, as described below.
+
+3.9 Rebuilding a library
+
+    The following commands provide a convenient way to rebuild a library:
+
+        lb exmpl -st > tfil
+        lb exmpl -f tfil
+
+    The  first command writes the names of  the modules in exmpl.lib to the
+    file tfil.  The second  command  then rebuilds  the library,  using  as
+    arguments the listing generated by the first command.
+
+    The -s option to the first command prevents lb from sending information
+    to tfil that would foul up the  second command. The names send to  tfil
+    entries for the directory blocks, **DIR**, but these are ignored by lb.
+
+3.10 Help
+
+    The -h option is provided for brief lapses of memory, and will generate
+    a  summary of lb functions and options  (same as calling lb without any
+    argument). It is producing an output like:
+
+        append/insert:          -<a/i>[+/-] target
+        move module:            -m<a/b>[+/-] target
+        replace module:         -r target
+        delete module:          -d target
+        uniqueness:             -u
+        extract module:         -x [target]
+        table listing:          -t
+        specify obj extension:  -e
+
+        usage: lb libraryname -[key][position] [posname] [modules] ...
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=LN></a><b> NAME ln, ln65</b><br><br>
+ln, ln65 - Aztec C Linker                           /* Apple // ProDOS utility */
+
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+ln [-options] file.o [file.o ...] [lib.lib ...]
+
+
+The 6502 linker is named ln on native versions of Aztec C65 and ln65 on
+cross development versions.
+
+Relocatable object files are named .r on the MS-DOS cross development version
+of Aztec C65.
+
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+The ln linker has two functions:
+
+    *   It ties  together the pieces of a program which have been  compiled
+        and assembled separately;
+
+    *   It converts the  linked pieces to a format which  can be loaded and
+        executed.
+
+The pieces must have been created by the Manx assembler.
+
+The first section of this chapter presents a brief introduction to  linking
+and  what the  linker does.  If you  have previous  experience with linkage
+editors, you may wish to continue reading with the second section, entitled
+"Using  the  Linker". There  you  will find  a  concise description  of the
+command format for the linker.
+
+ 1. INTRODUCTION TO LINKING
+
+1.1 Relocatable Object Files
+
+The object code produced by the  assembler is "relocatable" because it  can
+be  loaded anywhere in memory. One task of the linker is to assign specific
+addresses to the  parts of  the program.  This tells  the operating  system
+where to load the program when it is run.
+
+1.2 Linking hello.o
+
+It  is very unusual for a C  program to consist of a single, self-contained
+module. Let's consider a simple  program which prints "hello, world"  using
+the function, printf. The terminology here is precise; printf is a function
+and not an intrinsic feature  of the language. It  is a function which  you
+might  have written,  but it  already happens  to be  provided in  the file
+c.lib . This file is a library  of all the standard i.o functions. It  also
+contains  many support routines  which are called in  the code generated by
+the compiler. These  routines aid in  integer arithmetic, operating  system
+support, etc.
+
+When  the linker sees that a call to printf was made, it pulls the function
+from the library and combines it with the "hello, world" program. The  link
+command would look like this:
+
+    ln hello.o c.lib
+
+When  hello.c  was  compiled, calls  were  made to  some  invisible support
+functions in  the library.  So linking  without the  standard library  will
+cause some unfamiliar symbols to be undefined.
+
+All  programs will need  to be linked with  one of the  versions of c.lib .
+Initially, you  can use  c.lib itself.  Later on,  if you  find that  c.lib
+doesn't suit your requirements, you can use one of the other versions.
+
+1.3 The Linking Process
+
+Since the  standard  library contains  only  a limited  number  of  general
+purpose  functions, all but  the most trivial programs  are certain to call
+user-defined functions. It is up to  the linker to connect a function  call
+with the definition of the function somewhere in the code.
+
+In  the example  given below,  the linker will  find two  function calls in
+file 1. The reference to func1  is "resolved" when the definition of  func1
+is found in the same file. The following command
+
+    ln file1.o c.lib
+
+will  cause  an error  indicating that  func2 is  an undefined  symbol. The
+reason is that the definition of func2 is in another file, namely file2.o .
+The linkage has to include this file in order to be successful:
+
+    ln file1.o file2.o c.lib
+
+
+    file1                            file2
+
+    func1 ()                         func2 ()
+    {                                {
+        printf ("hello, ");              printf ("world");
+        return;                          return;
+    }                                }
+
+    main ()
+    {
+        func1 ();
+        func2 ();
+    }
+
+1.4 Libraries
+
+A library is  a collection  of object files  put together  by a  librarian.
+Libraries  intended for use with ln must  be built with the Manx librarian,
+lb.
+
+All the object  files specified  to the linker  will be  "pulled into"  the
+linkage;  they  are automatically  included in  the final  executable file.
+However, when a library is encountered, it is searched. Only those  modules
+in the library which satisfy a previous function call are pulled in.
+
+1.5 For example
+
+Consider  the "hello, world" example. Having looked at the module, hello.o,
+the linker has built  a list of undefined  symbols. This list includes  all
+the  global  symbols  that have  been  referenced but  not  defined. Global
+variables and all function names are considered to be global symbols.
+
+The list of undefined's  for hello.o includes the  symbol printf. When  the
+linker  reaches the standard library, this is one of the symbols it will be
+looking for. It will  discover that printf is  defined in a library  module
+whose  name also happens to be printf. (There is not any necessary relation
+between the name of a library module and the functions defined within it.)
+
+The  linker pulls in the printf module in order to resolve the reference to
+the printf function.
+
+Files are examined in the order in which they are specified on the  command
+line. So the following linkages are equivalent:
+
+    ln hello.o
+
+    ln c.lib hello.o
+
+Since no symbols are undefined when the linker searches c.lib in the second
+line, no modules are pulled in. It is good practice to leave all  libraries
+at the end of the command line, with the standard library last of all.
+
+1.6 The Order of Library Modules
+
+For  the  same  reason,  the  order of  the  modules  within  a  library is
+significant. The linker searches a library once, from beginning to end.  If
+a  module  is pulled  in at  any point,  and that  module introduces  a new
+undefined symbol,  then  that  symbol  is added  to  the  running  list  of
+undefined's.  The linker will  not search the library  twice to resolve any
+references which remain unresolved.  A common error  lies in the  following
+situation:
+
+    module of program             references (function calls)
+
+    main.o                        getinput, do_calc
+    input.o                       gets
+    calc.o                        put_value
+    output.o                      printf
+
+Suppose we build a library to hold the last three modules of this  program.
+Then our link step will look like this:
+
+    ln main.o proglib.lib c.lib
+
+But  it is important  that proglib.lib is  built in the  right order. Let's
+assume  that  main()  calls  to  functions,  getinput  ()  and   do_calc().
+getinput()  is defined in the module input.o. It in turn calls the standard
+library function  gets(). do_calc()  is in  calc.o and  calls  put_value().
+put_value() is in output.o and calls printf(). What happens at link time if
+proglib.lib is built as follows?
+
+    proglib.lib       input.o
+                      output.o
+                      calc.o
+
+After main.o, the  linker has getinput  and do_calc undefined  (as well  as
+some  other  support functions  in  c.lib). Then  it  begins the  search of
+proglib.lib. It  looks at  the  library module,  input, first.  Since  that
+module  defines getinput, that symbol is taken off the list of undefined's.
+But gets is added to it.
+
+The symbols do_calc  and gets are  undefined when the  linker examines  the
+module,  output. Since  neither of  these symbols  are defined  there, that
+module is ignored. In  the next module, calc,  the reference to do_calc  is
+resolved but put_value is a new undefined symbol.
+
+The linker still  has gets  and put_value undefined.  It then  moves on  to
+c.lib,  where  gets  is  resolved.  But  the  call  to  put_value  is never
+satisfied. The error from the linker will look like this:
+
+    Undefined symbol: put_value_
+
+This means  that the  module defining  put_value was  not pulled  into  the
+linkage.  The reason, as  we saw, was  that put_value was  not an undefined
+symbol when the output module was passed over. This problem would not occur
+with the library built this way:
+
+    proglib.lib       input.o
+                      calc.o
+                      output.o
+
+The  standard libraries were put together with  much care so that this kind
+of problem would not arise.
+
+Occasionally it becomes difficult or impossible to build a library so  that
+all  references are resolved.  In the example, the  problem could be solved
+with the following command:
+
+    ln main.o proglib.lib proglib.lib c.lib
+
+The second time  through proglib.lib, the  linker will pull  in the  module
+output.  The reason this is not the  most satisfactory solution is that the
+linker has to search the library twice; this will lengthen the time  needed
+to link.
+
+ 2. USING THE LINKER
+
+The general form of a linkage is as follows:
+
+    ln [-options] file.o [file.o ...] [lib.lib ...]
+
+The linker can create programs having the following types:
+
+    *   PRG programs, which can only be executed in the SHELL environment;
+
+    *   BIN programs, which  can be executed in either in  the SHELL or the
+        Basic Interpreter environments;
+
+    *   SYS programs, which are ProDOS system programs.
+
+By default, the linker creates a PRG program. The +B option makes it create
+a  BIN  program, and  the  +S option  make it  create  a SYS  program. When
+creating a BIN or SYS  program, you will also  have to include the  startup
+routine samain.o in the program.
+
+2.1 The executable file
+
+The  name of the executable output file can be selected using the -O linker
+option. If this option isn't used, the  linker will derive the name of  the
+output  file from that of the first object file listed on the command line,
+by deleting its extension. In the default case, the executable file will be
+located  in the directory  in which the  first object file  is located. For
+example,
+
+    ln prog.o c.lib
+
+will produce the file  prog. The standard library,  c.lib, will have to  be
+included in most linkages.
+
+A  different output  file can be  specified with  the -O option,  as in the
+following command:
+
+    ln -O program mod1.o mod2.o c.lib
+
+This command  also  shows how  several  individual modules  can  be  linked
+together. A "module", in this sense, is a section of a program containing a
+limited number of functions, usally related. These modules are compiled and
+assembled separately and linked together to produce an executable file.
+
+2.2 Libraries
+
+Several  libraries of object  modules are provided with  the Aztec C65. The
+most freqently-used of these are c.lib, which contains 6502 versions of the
+non-floating  point functions, and  m.lib, which contains  6502 versions of
+the floating  point  functions.  Other libraries  are  provided  with  some
+versions of Aztec C65.
+
+All  programs must be linked with one of the versions of c.lib. In addition
+to containing  6502 versions  of all  the non-floating  point functions  it
+contains  internal functions  which are called  by compiler-generated code,
+such as functions to perform long arithmetic.
+
+Programs  that perform floating point operations must be linked with one of
+the version of m.lib, in addition to a version of c.lib. The floating point
+library must be specified on the linker command line before c.lib .
+
+Libraries  of user modules  can also be  searched by the  linker. These are
+created with the Manx lb program, and must be listed on the linker  command
+line before the Manx libraries.
+
+For  example,  the  following  links the  module  program.o,  searching the
+libraries mylib.lib, new.lib, m.lib and c.lib for needed modules:
+
+    ln program.o mylib.lib new.lib m.lib c.lib
+
+Each of the  libraries will be  searched once  in the order  in which  they
+appear on the command line.
+
+Libraries  can be conveniently specified using  the -L option. For example,
+the following command is equivalent to the one above:
+
+    ln -O program.o -lmylib -lnew -lm -lc
+
+For more information, see the description of the -L option below.
+
+ 3. LINKER OPTIONS
+
+3.1 Summary of options
+
+3.1.1 General Purpose Options
+
+    -O file    Write executable code to the file named file.
+
+    -Lname     Search the library name.lib for needed modules.
+
+    -F file    Read common arguments from file.
+
+    -T         Generate a symbol table file.
+
+    -M         Don't issue warning messages.
+
+    -N         Don't abort if there are undefined symbols.
+
+    -V         Be verbose.
+
+3.1.2 Options for Segment Address Specification
+
+    -B addr    Set the program's base address to the hex value addr.
+
+    -C addr    Set the  starting address of the  program's code  segment to
+               the hex value addr.
+
+    -D addr    Set the  starting address of the  program's data segment  to
+               the hex value addr.
+
+    -U addr    Set the starting offset of the  program's uninitialized data
+               segment to the hex value addr.
+
+3.1.3 Option for Overlay Usage
+
+    -R         Create a symbol table to be used when linking overlays.
+
+    +C size    Reserve size bytes at end of the program's code segment (the
+               overlay's code segment is loaded here). size is a hex value.
+
+    +D size    Reserve  size  bytes  at  end  of  the  program's  code  and
+               uninitialized data segements (the  overlay's data is  loaded
+               here). size is a hex value.
+
+3.1.4 Special Options for ProDOS
+
+    +B             Create a BIN program.
+
+    +S             Create a SYS program.
+
+    +H start,end   Define a hole in the program, whose beginning and ending
+                   addresses are hex values start and end.
+
+3.2 Detailed description of the options
+
+3.2.1 General Purpose Options:
+
+3.2.1.1 The -O option
+
+The  -O option can  be used to  specify the name  of the file  to which the
+linker is to write the executable program. The name of this file is in  the
+parameter  that follows the  -O. For example,  the following command writes
+the executable program to the file progout:
+
+    ln -O progout prog.o c.lib
+
+If this option isn't  used, the linker derives  the name of the  executable
+file from that of the first input file, by deleting its extension.
+
+3.2.1.2 The -L option
+
+The  -L option provides  a convenient means  of specifying to  the linker a
+library that is should search, when the extension of the library is .lib.
+
+The name  of the  library is  derived  by concatenating  the value  of  the
+environment  varibale  CLIB, the  letters  that immediately  follow  the -L
+option, and  the string  .lib. For  example, with  the libraries  subs.lib,
+io.lib,  m.lib and c.lib in a directory specified by CLIB, you can link the
+module prog.o, and have the linker search the libraries for needed  modules
+by entering
+
+    ln prog.o -lsubs -lio -lm -lc
+
+CLIB  is  set using  the SHELL's  set command.  For example,  the following
+command defines CLIB when the libraries are in the directory /ln/lib:
+
+    set CLIB=/ln/libs/
+
+Note the terminating slash on the CLIB variable: this is required since the
+linker simply prepends the value of the CLIB variable to the -L string.
+
+3.2.1.4 The -F option
+
+-F  file causes the linker to merge the contents of the given file with the
+command line  arguments.  For example,  the  following command  causes  the
+linker  to  create an  executable program  in the  file myprog.  The linker
+includes the  modules  myprog.o, mod1.o  and  mod2.o in  the  program,  and
+searches the libraries mylib.lib and c.lib for needed modules.
+
+    ln myprog.o -F argfile c.lib
+
+where the file argfile, contains the following:
+
+    mod1.o mod2.o mylib.lib
+
+The  linker  arguments in  argfile  can be  seperated  by tabs,  spaces, or
+newlines. There are several uses for the -F option. The most obvious is  to
+supply  the names of modules that are frequently linked together. Since all
+the modules named  are automatically  pulled into the  linkage, the  linker
+does  not spend any time  in searching, as with  a library. Furhermore, any
+linker option except -F  can be given in  a -F file. -F  can appear on  the
+command  line more than once, and in any order. The arguments are processed
+in the order in which they are read, as always.
+
+3.2.1.5 The -T option
+
+The  -T option creates  a disk file  which contains a  symbol table for the
+linkage. This file  is just  a text  file which  lists each  symbol with  a
+hexadecimal  address. This address is either the entry point for a function
+or the location  in memory  of a  data item. A  perusal of  this file  will
+indicate which functions were actually included in the program.
+
+The  symbol  table  file  will have  the  same  name as  that  of  the file
+containing the executable program, with extension changed to .sym .
+
+3.2.1.6 The -M option
+
+The linker issues  the message "multiply  defined symbol" when  it finds  a
+symbol  that is  defined with  the assembly  language directives  global or
+public in more than one module. The -M option causes the linker to  supress
+this  message  unless  the  symbol  is  defined  in  more  than  one public
+directive.
+
+To maintain compability with the previous  versions of Aztec C, the  linker
+will  generate  code for  a  variable that  is  defined in  multiple global
+statements and  in  at  most  one public  statement,  and  also  issue  the
+"multiply  defined symbol" message. Thus, if  you use the global and public
+directives in this  way, and don't  want to  get this message,  use the  -M
+option to supress them.
+
+The  definition of  a symbol  in more that  one public  directives is never
+valid, so the -M option doesn't supress messages in this case.
+
+3.2.1.7 The -N option
+
+Normally, the  linker halts  without generating  an executable  program  if
+there  are undefined symbols. The  -N option causes the  linker to go ahead
+and generate an executable program anyway.
+
+3.2.1.8 The -V option
+
+The -V option causes the linker to send a progress report of the linkage to
+the screen as each input file is processed. This is useful in tracking down
+undefined symbols and errors which may occur while linking.
+
+
+3.2.2 Option for segment address specification
+
+The linker organizes a program into three segments: code, initialized data,
+and uninitialized data areas. You can define the starting address of  these
+segments  using the -C,  -D, and -U linker  options, respectively. A fourth
+option, -B, will set the "base  address" of the program. These options  are
+followed by the desired offset, in hex.
+
+By  default, the base address  of a PRG or BIN  program is 0x800, while the
+base address of a SYS program is 0x2000. Also by default, a program's  code
+segment  starts three  bytes after the  base address,  its initialized data
+segment  follows  the  code,  and   its  uninitialized  data  follows   the
+initialized data.
+
+A  file created by the linker contains  a memory image of the program, from
+its base address through the end  of its code or initialized data  segments
+(whichever  is higher).  This image is  loaded into memory,  with the first
+byte in the file loaded at the program's base address.
+
+By default, a program is expected  to begin execution at its base  address.
+Most  programs  have  a  startup  routine,  which  performs  initialization
+activities and then calls the program's main function. This entry point  to
+the  startup routine is usually somewhere in  the middle of the program, so
+at the base address the linker will normally set a jump instruction to  the
+entry point.
+
+You  can explicitly specify that  a label in a module  is an entry point by
+placing the label in  the operand field of  the module's assembly  language
+entry  directive.  For  example,  the crt0  module  in  c.lib  contains the
+function .begin . This label is dclared  in a public directive and also  in
+the  module's entry  directive. When a  C module is  compiled, the compiler
+always generates a reference to .begin;  thus, when the program is  linked,
+ln  will include the crt0() module from c.lib and place a jump to .begin at
+the program's base address.
+
+If the linker doesn't find  a startup routine when  it links a program,  it
+won't set the jump instruction at the program's base address. In this case,
+if you don't specify a starting  offset for the program's code segment,  it
+will right at the base address.
+
+For example, the following command sets the base address of prog to 0x4000:
+
+    ln -B 4000 -O prog prog.o -lc
+
+Because  none  of the  other segment  selection options  were used  in this
+example, the program's code  will begin at offset  0x4003, followed by  its
+initialized data, followed by its uninitialized data.
+
+In  the next example, the program's base address is set to 0x900 the offset
+of its code, initialized data,  and uninitialized data segments to  0x2000,
+0x2800, and 0x3000, respectively.
+
+    ln -B 900 -C 2000 -D 2800 -U 3000 prog.o -lc
+
+3.2.3 Options for Overlay Usage
+
+The  -R option causes the  linker to generate a  file containing the symbol
+table. It's used when linking a program which calls overlays.
+
+The  name of the symbol  table file is derived  from that of the executable
+file by changing the  extension to .rsm  . The file is  placed in the  same
+directory as the executable file.
+
+The  linker reserves space in a program between its uninitialized data area
+and its heap, into which the  program's overlay will be loaded. The  amount
+of  space equals the sum of the values  that you define using the +C and +D
+options. For example,
+
+    ln +C 3000 +D 1000 prog.o -lc
+
+will reserve 0x400 bytes for overlays.
+
+3.2.4 Special Option for ProDOS
+
+3.2.4.1 The +B Option
+
+The +B option  causes the linker  to set the  type of a  file containing  a
+created program to BIN.
+
+3.2.4.2 The +S Option
+
+The  +S option  causes the linker  to set the  type of a  file containing a
+created program to SYS and to set the default base address for the  program
+to 0x2000.
+
+3.2.4.3 The +H option
+
+The  +H option defines a  "hole", that is an area  of memory into which the
+linker should not place a  program's code or data.  You can create at  most
+four holes in a program using +H options.
+
+The option has the following form:
+
+    +H start,end
+
+where  start and end are the addresses,  in hex, of the hole's starting and
+ending addresses.
+
+For example, suppose  you want  to create a  program, line,  that uses  the
+primary  graphics page (between addresses 0x2000-0x4000) and that begins at
+address 0x800. The following command will link the program:
+
+    ln +H 2000,4000 line.o -lc
+
+The linker will place as much of the program's code and data as possible in
+the  area between 0x800-0x2000,  and place any additional  code and data in
+the area above 0x4000.
+
+The linker creates a  program's code segment  by concatenating module  code
+segments,  until and  unless a module's  code overlaps a  reserved area. If
+this occurs, the linker  moves the module's entire  code segment above  the
+reserved  area, in  the first non-reserved  area in which  it will entirely
+fit, and then continues the concatenation of module code segments.
+
+The  linker creates a program's initialized  data segement in the same way:
+it concatenates  module  initialized data  segments  as much  as  possible,
+without  overlapping  a  reserved  area  and  without  breaking  a module's
+initialized data segment into discontigous pieces.
+
+Because the linker won't break up a module's code segment or data  segment,
+it's likely that some space below a hole will be left unused by the linker.
+</PRE></FONT><b> DIAGNOSTICS </b><br><br><PRE><FONT SIZE=2>
+If  the linker fails it  return -1  as its value  that, for  example, tells
+shell-scripts to stop immediatly.
+</PRE></FONT><b> SEE ALSO </b><br><br>
+as, cc, lb, set
+
+<br>
+<br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=LOC></a><b> NAME lock, unlock</b><br><br>
+lock, unlock - lock and unlock files
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+lock file1 file2 ...                                 /* Apple // utility */
+
+unlock file1 file2 ...
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+These commands lock  and unlock the  specified files. When  locked, a  file
+can't be removed, renamed, or written to.
+
+lock and unlock are built-in SHELL commands.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=LS></a><b> NAME ls</b><br><br>
+ls - list directory contents
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+ls [-option] [name1 name2 ...]              /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+ls displays information about the  files and directories name1, name2,  ...
+If  no names are specified, ls displays information about all the files and
+directories in the current directory.
+
+A  name  can  optionally  specify  multiple  files,  using  the   "wildcard
+characters"  * and ?. These  have their standard meaning:  * matches one or
+more characters, and ? matches a single character.
+
+ls sends the information to its  standard output. This information thus  by
+default  is sent to the  console, but can be redirected  to a file or other
+device in the normal way.
+
+ls by default displays information in 'short form', listing just the  names
+of  the specified files and directories. You can also specify the -l option
+to cause  ls  to  display  information in  'long  form',  listing  lots  of
+information.
+
+When  ls sends information in  short form to the  console, the names are in
+columns on the  screen, with  a dash  preceding directory  names. When  the
+information is sent to a file or other device, the names are listed one per
+line, and a directory name isn't by default preceded by a dash.
+
+ls usally sorts the  list it's going  to display. By  default, the list  is
+sorted  alphabetically, you  can also specify  options to cause  ls to sort
+based on other the list such 'last modified' time and file size, and, for a
+given criteria, to sort in the reverse of the normal order.
+
+ls supports the following options:
+
+    -l    list in long form.
+    -p    When listing  in  short form,  and  redirected, precede directory
+          names with a dash.
+    -t    sort by 'last-modified' time.
+    -s    sort by file size.
+    -r    reverse the order of the sort.
+    -x    don't sort the file list.
+
+ LONG FORMAT
+
+    The  -l option causes the listing to be made in 'long format', in which
+    additional information is displayed  for each file.  In this case,  the
+    listing for a file or directory has the following format:
+
+        flags type (aux_type) size date name
+
+    where:
+
+        *    name is the name of the file or directory.
+        *    date is the date and time at which it was last modified.
+        *    size is the number of bytes that have been written to it.
+        *    aux_type is its  aux_type field (for  a  program, this  is its
+             load adress).
+        *    type defines the contents of the file or directory.
+        *    flags defines other attributes of the file or directory.
+
+ FLAGS FIELD
+
+    The flags field consists  of five characters,  each defines whether  or
+    not  the file has a certain attribute. If the file or directory has all
+    these attributes,  the falgs  field will  be "debwr".  If the  file  or
+    directory   doesn't  have  a   particular  attribute,  the  attribute's
+    characters is replaced in the list by a dash, '-'.
+
+    The meanings of the characters are:
+
+        d    deletable.
+        e    erasable.
+        b    needs to be backed up.
+        w    writable.
+        r    readable.
+
+ TYPE FIELD
+
+    The type field defines the type of the file. Possible values are:
+
+        PRG    File conatins a  program that  can only  be run in the SHELL
+               environment.
+        BIN    File contains a type program that can be run in the SHELL or
+               Basic environment.
+        SYS    File contains a ProDOS system file.
+        DIR    Directory.
+        TXT    This is the  only other  type  of file  created by the Aztec
+               programs.  fopen,  open, and  related functions  also create
+               files or type TXT.
+
+ MOUNTED VOLUMES
+
+    The SHELL pretends that the file system has a root directory, and  that
+    all volume directories are subdirectories of this root directory. So to
+    diplay the names of all mounted volumes, enter the command
+
+        ls /
+
+    And to display the names of all mounted volumes along with the  numbers
+    of the slot and drives that contain them, enter the command
+
+        ls -l /
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=MKD></a><b> NAME mkdir</b><br><br>
+mkdir - make directory
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+mkdir dirname1 dirname2 ...                 /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+mkdir creates one or more directories, named dirname1, dirname2, ...
+
+An empty directory can be  removed with the rm command  on an Apple //  and
+with rmdir command under UNIX.
+</PRE></FONT><b> SEE ALSO </b><br><br>
+rm
+
+<br>
+<br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=MV></a><b> NAME mv</b><br><br>
+mv - move files
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+mv [-f] infile outfile                      /* Apple // and UNIX utility */
+
+mv [-f] file1 [file2 ...] dir
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+mv moves files,  and their  attributes. The  original files  then cease  to
+exist.
+
+The  first form of the  command, as shown above,  copies infile to outfile.
+The second copies file1, file2, ... into the directory named dir.
+
+The -f option causes mv to  automatically overwrite any existing files.  If
+this  option isn't specified and if a file to be created already exists, mv
+will ask if you want it overwritten.
+
+In both forms, mv will simply change the name of the original file to  that
+of  the  target  file  if the  two  files  are in  the  same  directory. It
+physically copies  a file  and  then deletes  the  original only  when  the
+directories of the two files differ.
+
+mv is a built-in SHELL command on an Apple //.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+The  following  command  moves the  file  hello.c  that is  in  the current
+directory to the file newfile.c in the /source directory:
+
+    mv hello.c /source/newfile.c
+
+The next command moves all ".lib" files in the /ln directory to the /pl/lib
+directory:
+
+    mv /ln/*.lib /pl/lib
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br>
+<HR><a name=OBD></a><b> NAME obd</b><br><br>
+obd - list object code
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+obd objfile                                          /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+obd lists the loader items  in an object file.  It has a single  parameter,
+which is the name of the object file.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=ORD></a><b> NAME ord</b><br><br>
+ord - sort object module list
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+ord [-v] [infile [outfile]]                          /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+ord sorts a list of object file names. A library of the object modules that
+is generated from the sorted list by object module librarian, lb, will have
+a minimum number of 'backward references', that is, global symbols that are
+defined in one module and referenced in a later module.
+
+Since  the specification of a library to the linker causes it to search the
+library just  once,  a  library  having  no  backward  references  need  be
+specified  just once when linking a  program, and a library having backward
+references may need to be specified multiple times.
+
+infile is the name of  a file containing an  unordered list of file  names.
+These  files contain the object modules that  are to be put into a library.
+If infile isn't specified, this list is read from ord's standard input. The
+file names can be seperated be space, tab, or newline characters.
+
+outfile  is the name  of the file to  which the sorted  list is written. If
+it's not specified, the list is  written to ord's standard output.  outfile
+can only specified if infile is also specified.
+
+The  -v option causes ord  to be verbose, sending  messages to its standard
+error device as it proceeds.
+</PRE></FONT><b> SEE ALSO </b><br><br>
+lb, ln
+
+<br>
+<br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=PR></a><b> NAME pr</b><br><br>
+pr - initialize devices
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+pr s1 [s2 ...]                                       /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+pr initializes the devices that are in  slots s1, s2, ..., by calling  each
+device's ROM.
+
+pr is a built-in SHELL command.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+The  following command  initializes the card  in slot 2  by calling address
+0xC200:
+
+    pr 2
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=PWD></a><b> NAME pwd</b><br><br>
+pwd - print working directory
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+pwd                                         /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+pwd prints the name of the current directory.
+
+The name is  written to pwd's  standard output device.  Hence, the name  is
+printed  on the screen, by default, and can be redirected to another device
+or file, if desired.
+
+pwd is a built-in SHELL command.
+</PRE></FONT><b> SEE ALSO </b><br><br>
+cd
+
+<br>
+<br>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=RM></a><b> NAME rm</b><br><br>
+rm - removes files or directories
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+rm file [file ...]                          /* Apple // and UNIX utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+rm removes the specified files or directories.
+
+rm will not remove locked files or non-empty directories.
+
+Under UNIX rm doesn't remove directories. Locking is handled different.
+</PRE></FONT>
+<b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+The following command removes  the files file1.bak  and file2.bak from  the
+current directory:
+
+    rm file1.bak file2.bak
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=SET></a><b> NAME set</b><br><br>
+set - environment variable and exec utility
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+set                                                  /* Apple // utility */
+
+set VAR=string
+
+set VAR=
+
+set [-+x] [-+e] [-+n]
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+set is used  to examine  and set environment  variables, to  set exec  file
+options, and to enable the trapping of errors by the SHELL.
+
+set is a built-in SHELL command.
+
+Displaying and setting of environment variables:
+
+    The  first form listed for set causes set to display the name and value
+    of each environment variable.
+
+    The second form assigns string to the environment variable VAR.
+
+    The third form removes the variable VAR from the SHELL environment.
+
+Setting Exec file options:
+
+    x    Command line logging.  With this  option enabled, before a command
+         line  in an exec file  is executed, it's logged  to the screen. By
+         default, this option is disabled.
+
+    e    Exit prematurely.  With  this  option  enabled,  a  command  which
+         terminates  with a non-zero return code causes the exec file to be
+         aborted. By default, this option is enabled.
+
+    n    Non-execution. With  this  option enaabled,  commands  in the exec
+         file aren't executed. By default, this option is disabled.
+
+         Preceding  an  option's character  with a  minus sign  enables the
+         option, and preceding it with a plus sign disables it.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=SHI></a><b> NAME shift</b><br><br>
+shift - shift exec file variables
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+shift [n]                                            /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+shift causes the values assigned to an exec file variable to be  reassigned
+to  the next  lower-numbered exec  file variable.  n is  the number  of the
+lowest-numbered variable whose value is  to be reassigned, and defaults  to
+1.
+
+Thus,  shift causes the exec file variable $1 to be assigned with the value
+of $2, $2 to be assigned with $3, and so on. The original value assigned to
+$1  is lost. When all arguments to the  exec file have been shifted out, $1
+is assigned to the null-string.
+
+shift is a built-in SHELL command.
+</PRE></FONT><b> EXAMPLE </b><br><br><PRE><FONT SIZE=2>
+The following exec file, del, is  passed a directory as its first  argument
+and the names of files within the directory that are to be removed:
+
+    set j=$1
+    shift
+    loop i in $*
+    rm $j/$i
+    eloop
+
+In  this example, j is an environment variable. The first two statements in
+the exec file save the name of  the directory and then shift the  directory
+name out of the exec file variables.
+
+The loop then repeatedly calls rm to remove one of the specified files from
+the directory.
+
+Entering
+
+    del . file1.bak file2.bak
+
+will remove the files file1.bak and file2.bak from the current directory.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=SQZ></a><b> NAME sqz</b><br><br>
+sqz - sqeeze an object library
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+sqz file [outfile]                                   /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+sqz compresses an object module that was created by the Manx assembler.
+
+The  first parameter is the  name of the file  containing the module to  be
+compressed.  The second  parameter, which is  optional, is the  name of the
+file to which the compressed module will be written.
+
+If the  output file  is  specified, the  original  file isn't  modified  or
+erased.
+
+If  the output file isn't specified, sqz creates the compressed module in a
+file having a  temporary name, erases  the original file,  and renames  the
+output  file to have the  name of the original  file. The temporary name is
+different from the input file name by having the extent .sqz.
+
+If the output file isn't specified and an error occurs during the  creation
+of the compressed module, the original file isn't erased or modified.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br><HR><a name=TTY></a><b> NAME tty</b><br><br>
+tty - terminal emulation program
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+tty -sy -bxx                                         /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+tty is a terminal emulaion program that allows an Apple // operator to talk
+to  another computer. To the other system, the Apple // will appear to be a
+terminal that supports some of the special features of the ADM-3A terminal.
+
+tty reads  characters  from  the  keyboard and  writes  them  to  a  serial
+interface.  It  also reads  characters characters  from this  interface and
+writes them to  the console.  This interface  must be  compatible with  the
+Super Serial Card.
+
+The  -s option defines the number of the slot containing the interface. The
+number immediately  follows the  -s, with  no intervening  spaces. If  this
+option isn't specified, the interface is assumed to be in slot 2.
+
+The  -b option defines the baud rate of the serial interface. The baud rate
+immediately follows  the -b  option, with  no intervening  spaces. If  this
+option isn't specified, the baud rate is assumed to be 9600.
+
+To  exit tty, type control-2  (ie, type the '2'  key while holding down the
+control key).
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br>
+<HR><a name=VED></a><b> NAME ved</b><br><br>
+ved - vi-like text editor
+<br><br><b> SYNOPSIS </b><br><br><PRE><FONT SIZE=2>
+ved [-tn] [-gprog] file [+1,c msg]                   /* Apple // utility */
+</PRE></FONT><b> DESCRIPTION </b><br><br><PRE><FONT SIZE=2>
+ved is a screen oriented text editor  that has some of the features of  the
+UNIX vi editor.
+
+If  ved is  invoked with  a file name,  that file  will be  loaded into the
+memory buffer, otherwise it will be  empty. ved will only edit text  files:
+binary  files cannot be edited.  ved does all its  editing in memory and is
+thus limited in the  size of files  that it will edit.  In ved, the  memory
+buffer is never completely empty. There will always be at least one newline
+in the buffer.
+
+ THE SCREEN
+
+    ved has a  1000 character limit  on the size  of a line.  If a line  is
+    longer  than the width of the screen, it will wrap to the next line. If
+    a line starts at the bottom of the screen, and its too wide to fit, the
+    line  will  not  be  displayed.  Instead,  the  '@'  character  will be
+    displayed. Likewise, at the end of  the file, all lines beyond the  end
+    will consist only of a single '-' on each line.
+
+    A  number of commands take  a numeric prefix. This  prefix is echoed on
+    the status line as it is typed.
+
+ MOVING AROUND IN THE FILE
+
+    The normal mode of ved is command mode. During command mode, there  are
+    a  number of ways to  move the cursor around  the screen and around the
+    whole file.
+
+        newline      - move to beginning of the next line.
+        -            - move to the start of the previous line.
+        space        - move to the next character of the line.
+        backspace    - move to the previous character.
+        0            - move to the first character of this line.
+        $            - move to the last character of this line.
+        h            - move to the top line of the screen.
+        l            - move to the bottom line of the screen.
+        b            - move to the first line of the file.
+        g            - move to the n'th line of the file.
+        /string      - move to hte next occurence of 'string'.
+
+ DELETING TEXT
+
+    When the cursor is in the appropriate spot, there are two commands used
+    to delete existing text.
+
+        x     - delete  characters on the  current  line, beginning at  the
+                cursor and continuing up to, but not including the newline.
+        dd    - delete lines starting with the current line.
+
+    The  x and dd commands can be prefixed with a number, which defines the
+    number of  characters  or  lines  to be  deleted.  If  a  number  isn't
+    specified, just one character or line is deleted.
+
+    Note that deleting the last  character of the line (newline  character)
+    causes the following line to be appended to the current line.
+
+ INSERTING TEXT
+
+    To  add new text, hitting 'i' key will cause the top line of the screen
+    to indicated that you  are now in <insert>  mode. To exit insert  mode,
+    type  ESCAPE.  To  insert  a control  character  which  means something
+    special to ved into a text  file, first type control-v followed be  the
+    control  character itself.  Control characters  are displayed  as '^X',
+    where X is the appropiate character.
+
+    Typing 'o' will cause a new line to be created below the current  line,
+    and  the cursor will be placed on  that line and the editor placed into
+    <insert> mode.
+
+ MOVING TEXT AROUND
+
+    There are three commands  used for moving  text around. These  commands
+    make  use of a 1000 character yank  buffer. The contents of this buffer
+    is retained across files.
+
+        yy    - yank lines  starting with the  current  line into  the yank
+                buffer.
+        yd    - yank lines starting  with the  current line and then delete
+                them.
+        p     - "put" the lines in the yank  buffer after the current line.
+                The yank buffer is not modified.
+
+    A  number can be prefixed to the  yank commands, defining the number of
+    lines to  be yanked.  If a  number isn't  specified, just  one line  is
+    yanked.
+
+ MISCELLANEOUS COMMANDS
+
+    The  'z' command redraws the screen with the current line in the center
+    of the screen.
+
+    The 'r' command repalaces the character under the cursor with the  next
+    character typed.
+
+ FILE-RELATED COMMANDS
+
+    When in command mode, if the ':' key is hit, a ':' will be displayed on
+    the status  line.  At this  point,  a number  of  special  file-related
+    commands may be given.
+
+        :f            - displays info about the current file.
+        :w file       - writes the buffer to the specified file name.
+        :w            - writes the buffer to the last specfied file.
+        :e[!] file    - clears the buffer and prepares file for editing.
+        :r file       - reads the named file into the buffer.
+        :q[!]         - exits the editor.
+
+    In the above  table, square brackets  surrounding a character  indicate
+    that  the  character is  optional. The  exclamation  mark tells  ved to
+    execute  the commands in which it's  specified, even if the file that's
+    currently being edited has been modified  since it was last written  to
+    disk.
+
+ APPLE RELATED INFORMATION
+
+    In  order to use VED on older Apple //'s, which don't have a full ASCII
+    keyboard, you  need to  have the  single wire  switch key  modification
+    installed.   You  can  then  enter  upper  and  lower  case  alphabetic
+    characters using the SHIFT key. You can enter special character used by
+    C  programs by typing a control character, that is, by holding down the
+    control key  and then  typing another  key. The  following table  lists
+    these   control  characters  and  the  characters  to  which  they  are
+    translated. In this  table, ^X  is an  abbreviation for  "type X  while
+    holding  the  control key  down". The  first column  identifies control
+    codes that  you type,  the second  identifies the  characters to  which
+    control  codes are translated  when the keyboard is  in lower case mode
+    (that is, when the  SHIFT key is off).  The last column identifies  the
+    characters  to which control codes are  translated when the keyboard is
+    in upper case mode.
+
+        Press:    To get (lower):    To get (upper):
+
+        ^P        `                  @
+        ^A        {                  [
+        ^E        |                  \
+        ^R        }                  ]
+        ^N        ~                  ^
+        ^C        DEL                _
+        ^Q        ESC
+        ^U        TAB
+
+    ^U is generated by typing the 'right arrow key'.
+
+    To  exit insert mode, type is ESC key.  In addition to the ESC key, you
+    can type control-Q to exit VED's <insert> mode. This is usefull on some
+    older  Apple //e's, for which  ESC is intercepted by  the ROM and never
+    gets back to VED. Out  of insert mode, the  cursor can be moved  around
+    using the space bar to move rigth and the left arrow to move left.
+
+</PRE></FONT>
+<a href="./cat2.htm#topmenu">&lt;&lt; Back to Top</a>
+<br>
+<br>
+<HR>
+
+
+<center>
+&copy; Copyright Phade Software 1999<br>
+Released as FreeWare December 1999<br>
+</center>
+<!-- the end -->
+</FONT>
+</BODY>
+</HTML>

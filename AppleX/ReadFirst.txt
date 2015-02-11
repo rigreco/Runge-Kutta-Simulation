@@ -1,0 +1,204 @@
+ReadMe for AppleX 2013 Update
+Updated April 2013
+
+Release Notes and Other Stuff That Should Be In A ReadMe
+--------------------------------------------------------
+
+Additional Directory Structure - AppleX\PROGRAMS
+------------------------------------------------
+
+For the AppleX 2013 update, I have separated the directory structure for
+non- trivial Graphics and other non-trivial Demo Programs and placed them
+under AppleX\PROGRAMS. None of these were ever included in AppleX before
+now, and all have been written since late Fall of 2012 with the exception
+of a couple of the utilities and some demos from the Apple33 DOS 3.3
+Aztec C65 cross-compiler distribution. Those have been completely
+rewritten and are much improved.
+
+Graphics Mode Support Extended
+------------------------------
+
+AppleX now Supports
+
+LGR - Lo-Res
+DLGR - Double Lo-Res
+HGR - Hi-Res Color and Monochrome
+DHGR - Double Hi-Res Color and Monochrome
+
+4 of the subdirectories in the AppleX\PROGRAMS directory are related to
+the 4 main graphics modes of the Apple II (see above), and each contains
+source code, programs, utilities, documentation, and disk images related
+to working with the AppleX Aztec C65 distribution and Graphics on the
+Apple II. All 4 graphics mode are supported at a pretty similar level. Until the
+2013 Apple X update, support for Apple II graphics was limited, with 
+a huge focus on HGR color, because that's what I knew best.
+
+HGR support is still stronger than the rest in specialized areas because
+AppleX provides all the tools I wrote and used many years back in
+conjunction with full-blown projects to do such things as loading
+graphics libraries into Axiliary memory and other related stuff. But each
+of the 4 graphics modes provide image loaders, line drawing routines, and
+font routines and so forth.
+
+And most importantly (to me), AppleX comes with documented methodology
+and toools to aquire bit-mapped graphics from a variety of sources
+including Windows, Apple II Native Format, and Hybrid Sources like
+AppleWin Screen Captures of running programs that make obtaining graphics
+for use in your own programs easy if not too easy.
+
+Robust Documentation Much Expanded
+----------------------------------
+
+Please read the source code and documentation, and run the demos and
+programs you find in each AppleX\PROGRAMS\subdirectory as well as any
+documentation you find laying about for more information.
+
+The immensely expanded source code in the AppleX\GRAPHICS directory is
+also a good reference for more information. This is the source code for
+the G2 (Graphics) library, which also includes the source code from the
+original Aztec C65 G.lib.
+
+Comprehensive documentation for Aztec C itself and its original toolchain
+has been available in pdf format user's manuals from the Aztec C website
+at www.aztecmuseum.ca for a number of years now. But with this release of
+AppleX and with many pdf "tutorials" and users manuals being very much
+expanded-on especially for Apple II graphics programming, new life has
+been breathed into this old compiler, taking its capabilities far beyond
+the Apple II Community's "Retro-Compiler" perception... until AppleX, all
+that was available was a previous ProDOS native-mode shell version that
+does not even support creating floating point SYS programs, so if this
+perception is not clearly incorrect, it is somewhat understandabley
+incorrect.
+
+Aztec C is not as efficient in some areas as other cross-compilers for
+the Apple II, but when it comes to documentation and usability demos it
+holds its own, even today, 25 or so years later, and more than
+compensates for whatever inefficiencies it mat have by providing a stable
+and feature-rich environment which includes the documentation by Manx
+Software (available from the website at www.aztecmuseum.ca) supplemented
+with what AppleX provides.
+
+The source code for the compiler itself was apparently lost long ago
+according to Aztec C's founder, so we can't make changes that would be
+considered modern to its style, which is transitory K&R and not ANSI or
+ISO, but all the library source is available, and it is the library
+source that I have been modifying and expanding on to provide the AppleX
+improvements to Aztec C, in the same manner and spirit I first expanded
+it over 20 years ago.
+
+Tools and More Tools
+--------------------
+
+The AppleX\TOOLS directory also contains many utilities. Some are also
+related to Graphics, but some were written long ago. The utilities in the
+subdirectories under the AppleX\PROGRAMS directory have all been
+recently written, and are more specifically targetted at today's working
+environment. For that reason, they have been placed there instead of in
+the TOOLS directory.
+
+ProDOS Directory Services
+-------------------------
+
+The AppleX\PROGRAMS directory also contains a subdirectory called
+LISTDIR which demonstrates and implements G2 library routines related to
+reading ProDOS disks and finding files on them and so forth.
+
+Command Line and Unix-Like Programs for ProDOS
+----------------------------------------------
+
+Another expansion of the AppleX distribution is the production of
+programs that run under the Aztec C Shell for ProDOS 8. Shell Versions of
+SYS programs, which are PCODE mixed with native 6502 code. allow command
+line arguments and wildcard expansion and so forth, while being able to
+run at the same speed of execution as their SYS program counterparts in
+time critical operations like graphics and floating point calculations.
+
+Previous Updates and Brief History
+----------------------------------
+
+Since making AppleX available I have kept adding to it, but did not
+update the AppleX readme file.
+
+Website
+-------
+
+I also built a website called www.aztecmuseum.ca for AppleX and many other Aztec C compilers for other platforms, and time
+permitting I have done my best to keep the website up to date.
+
+Full Blown Aztec C Projects with Source Code
+--------------------------------------------
+
+After building the website, I made selected Full-Blown non-trivial
+"Projects" in Aztec C65 part of the distribution. They are in the
+PROJECTS direcory. Two of these projects (METOO and TIME) use overlays
+and auxiliary memory extensively and should prove informative. I also
+have 3 additional overlay projects that I will someday make available if
+time permits.
+
+Mixing the Old with the New
+---------------------------
+
+As I have done in the 2013 update with the PROGRAMS subdirectory, 
+I kept these projects in the PROJECTS directory, separate from
+the SAMPLES directory that comprised the first AppleX distribution.
+
+I also provided DOSBox support for Aztec C65 and included this with
+AppleX, not that it took me much work. With Windows 7 displacing WIndows
+XP, it turns-out this was a good idea. Along the way I also tested in
+Ubuntu in another DOS emulator, without problem. However I did not update
+the ReadMe with any of this, while I just kept adding to AppleX. In fact 
+I did not update the ReadMe at all.
+
+When I first started resurrecting Aztec C compilers I learned quickly
+about emulators, and quickly switched to the AppleWin emulator which I
+would be a fool not to recommend. The Apple II Oasis emulator is getting
+old, and crashes my new computer gloriously, and is pretty sparse
+especially compared to the AppleWin (1.22) we enjoy today.
+
+Ciderpress is an excellent disk manager. The Disk Manager in Apple II
+Oasis has some quirks... it handles DOS 3.3 disks well except that it
+will use lower-case naming which fouls DOS 3.3, but in either DOS 3.3 or
+ProDOS 8 it beats Ciderpress in one respect... you can fill a disk with
+multiple files then apply file-type sub-type/load attributes using a
+batch select on the fly. Other than for some of my own specialized nits,
+Cider Press is what I use continually these days as a disk manager for
+Apple II disk images or to port programs to my real Apple IIe on a CF
+(compact flash) card. Ciderpress supports this card (which inserts into a
+device called a MicroDrive).
+
+I have discovered through all this that there are many other options, my point being that the original Aztec C
+ReadMe like much of my old stuff that is still included in AppleX is
+quite dated and limited.
+
+I am also mindful that there doesn't seem to be anything I can't do with
+this old compiler except co-exist nicely with AppleSOft BASIC for ProDOS.
+Aztec C and AppleX is not targeted at AppleSoft BASIC programming anyway.
+
+Apple33 Aztec C65 for DOS 3.3
+-----------------------------
+
+Along the way, I also created a smaller distribution of Aztec C65
+for building Apple II DOS 3.3 programs.   
+
+Then for a couple of years or so, until Fall of 2012, I didn't do much
+with AppleX or Apple33.
+
+Permission to Distribute Aztec C65
+----------------------------------
+
+Someone pointed-out to me at some point that I have never indicated in
+this distribution that I have permission to distribute Aztec C65. This
+simply because I never updated the read me.
+
+Copyright Clarification - Copyright and Conditions of Use 
+---------------------------------------------------------
+
+Harry Suckow (the Copyright holder for Aztec C) has given permission to
+redistribute Manx Software Systems discontinued Aztec C compilers for
+now-obsolete platforms.Your use must be Fair as it applies to Manx's
+Copyright on these compilers. They are not for sale.
+
+Bill Buckels
+bbuckels@mts.net
+
+End of ReadMe

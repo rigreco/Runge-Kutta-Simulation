@@ -1,0 +1,4 @@
+lb 3.40a 5-29-86
+**DIR**     beep        bs          cdelete     cinsert     clear       
+cr          cursup      cursrt      curs        eol         home        
+ldelete     lf          linsert     tab         

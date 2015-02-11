@@ -1,0 +1,19 @@
+lb 3.40a 5-29-86
+**DIR**     plots       emslode     emsput      emsput2     fbox2       
+hibase2     monochar    monoline    monoplot    bopen       drawline    
+bsave       bload       picsave     subchar     dlores2     dlopixel    
+dlofont     dxlut       liblode     fontlode    fileplot    filechar    
+hbsh        hgr         text        plotchar    circle      line        
+plot        clear       page        fscreen     mscreen     setasp      
+dmonline    clear1      play        dhrcalc     dhvlin      drfbox      
+dmonplot    grafmode    fbox        piclode     putimage    hibase      
+poke        getch       kbhit       sound       dhdisc      dmonbyte    
+dxlode      call33      bottom      putrax      bars        emsget      
+emsrag      emsrig      keyclr      dhcirc      dhrline     dmonchar    
+hibox       pchar       lofont      lores       lopixel     textbase    
+dhrfont     dlodelo     drbytes     drflood     drmain      dhrplot     
+drlode      hibase3     grafmodx    dlores      dxblock     dxline      
+dxlode2     dhrcalc2    dwait       dhrpixel    dplode      crt80       
+putchar     ff          strulr      raxlode     ffg         **DIR**     
+d2lode      d2plot      d2vline     d2pld       d2circ      d2fbox      
+d2flood     d2font      d2init      d2line      d2save      lolode      

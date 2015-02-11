@@ -1,0 +1,176 @@
+/* ------------------------------------------------------------------------
+System       : Manx Aztec C65 Version 3.2b
+               MS-DOS cross-development environment
+Platform     : Apple IIe 128K PRODOS 8
+Program      : dxlode.c
+Description  : G2 Library Routine
+               Double Hi-Res 140 x 192 x 16 color Image Loader
+               xunch an xcrunched image to the screen
+Written by   : Bill Buckels
+Date Written : January 2013
+Revision     : 1.0 First Release
+Licence      : You may use this routine for whatever you wish as long
+               as you agree that Bill Buckels has no warranty or
+               liability obligations whatsoever from said use.
+------------------------------------------------------------------------ */
+#include <fcntl.h>
+
+extern unsigned DHRB[];
+extern char *dhrmain;
+extern char *dhraux;
+
+#define BLOCK_SIZE 256
+
+
+dxraster(xorg, y, mainbuf, auxbuf, packet)
+int xorg, y, packet;
+char *mainbuf, *auxbuf;
+{
+	int offset = xorg;
+
+	while ((offset%7)!=0) offset++; /* advance to left side */
+    offset = ((offset / 7) * 4);
+	offset = (offset / 2);
+    offset=DHRB[y]+offset;
+
+	*dhraux = 0;  /* select auxiliary memory */
+	movmem(auxbuf,offset,packet);
+	*dhrmain = 0; /* reset to main memory */
+	movmem(mainbuf,offset,packet);
+
+	return;
+}
+
+
+/* read and xunch an xcrunched image to the screen */
+int dxlode(name,xorg,yorg)
+char *name;
+int xorg,yorg;
+{
+   int fh, c, status=0, pattern;
+   int x, x1, xcnt, xmain, xaux, y1, z;
+   int offset=0,width,height,target, packet,bytes, cnt;
+   unsigned char ch, color, mainbuf[40], auxbuf[40], buf[BLOCK_SIZE];;
+
+#asm
+    sta  $c054 ; MAIN MEM
+#endasm
+
+
+   fh = open(name,O_RDONLY,0x3C); /* open a binary file */
+   if (fh == -1) return -1;
+   c = read(fh,buf,5);
+
+   if (c!= 5) {
+	   close(fh);
+	   return -1;
+   }
+
+   if (buf[0] == 'X' && buf[1] == 'C' && buf[2] == '2') {
+      width = buf[3];
+      height = buf[4];
+   }
+   else {
+	   close(fh);
+	   return -2;
+
+   }
+
+   if (read(fh,buf,BLOCK_SIZE) < BLOCK_SIZE) {
+	   close(fh);
+	   return -3;
+   }
+
+
+    width  = width/2;
+    packet = (width * 4)/7;
+    target = (width * height);
+
+    bytes = cnt = x1 = y1 = status = 0;
+
+	do{
+
+	    ch = buf[bytes]; bytes++;
+	    if (bytes == BLOCK_SIZE) {
+			read(fh,buf,BLOCK_SIZE); bytes = 0;
+		}
+
+	    /* check to see if its raw */
+	    /* if its not, run encoded */
+	    if(0xC0 == (ch & 0xc0)){
+	       	xcnt = 0x3f & ch;
+			ch = buf[bytes]; bytes++;
+			if (bytes == BLOCK_SIZE) {
+				read(fh,buf,BLOCK_SIZE); bytes = 0;
+			}
+	    }
+	    else
+	      xcnt = 1;
+
+	 	for(x=0;x<xcnt;x++){
+			if (offset < target) {
+				for (z = 0; z < 2; z++ ) {
+					/* unpack the 2 colors - low nibble first */
+					if (z == 0) color = ch & 0xf;
+					else color = ch >> 4;
+
+					xaux = xmain = (x1/7);
+					pattern = cnt%7;
+                    cnt++;
+					switch(pattern) {
+						case 0:
+								auxbuf[xaux]  = color; /* 00001111 4 bits */
+								break;
+						case 1:
+								auxbuf[xaux] |= ((color << 4) & 0x70); /* 01110000 3 bits */
+								mainbuf[xmain] = ((color >> 3)& 0x01); /* 00000001 1 bit */
+								break;
+						case 2:
+								mainbuf[xmain] |=  (color <<1); /* 00011110 4 bits */
+								break;
+						case 3:
+								mainbuf[xmain] |= ((color << 5) & 0x60); /* 01100000 2 bits */
+								xaux++ ; /* second byte in auxiliary memory byte pair */
+								auxbuf[xaux]  = ((color >> 2) & 0x03); /* 00000011 2 bits */
+								break;
+						case 4:
+								xaux++ ; /* second byte in auxiliary memory byte pair */
+								auxbuf[xaux] = ((color << 2) & 0x3c); /* 00111100 4 bits */
+								break;
+						case 5:
+								xaux++; /* second byte in auxiliary memory byte pair */
+								auxbuf[xaux] |= ((color << 6) & 0x40); /* 01000000 1 bit */
+								xmain++; /* second byte in main memory byte pair */
+								mainbuf[xmain] = ((color >> 1) & 0x07); /* 00000111 3 bits */
+								break;
+						case 6:
+								xmain++; /* second byte in main memory byte pair */
+								mainbuf[xmain] |= ((color << 3) & 0x78); /* 01111000 4 bits */
+
+						}
+				}
+				x1++;
+				if (x1 >= width) {
+					/* move scanline to screen */
+					dxraster(xorg, y1 + yorg, mainbuf, auxbuf, packet);
+					cnt = x1 = 0;
+					y1++;
+					if (y1 >= height)break;
+				}
+			}
+			else break;
+
+			offset++;
+		}
+		if (y1 >= height)break;
+
+     } while(offset<target);
+
+   close(fh);
+
+#asm
+    sta  $c054 ; MAIN MEM
+#endasm
+
+    return 0;
+}

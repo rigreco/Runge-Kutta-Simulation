@@ -1,0 +1,36 @@
+DOSBox
+
+================
+5. Special Keys:
+================
+
+ALT-ENTER     Switch to full screen and back.
+ALT-PAUSE     Pause emulation.
+CTRL-F1       Start the keymapper.
+CTRL-F4       Change between mounted disk-images. Update directory cache for all drives!
+CTRL-ALT-F5   Start/Stop creating a movie of the screen. (avi video capturing)
+CTRL-F5       Save a screenshot. (png)
+CTRL-F6       Start/Stop recording sound output to a wave file.
+CTRL-ALT-F7   Start/Stop recording of OPL commands.
+CTRL-ALT-F8   Start/Stop the recording of raw MIDI commands.
+CTRL-F7       Decrease frameskip.
+CTRL-F8       Increase frameskip.
+CTRL-F9       Kill dosbox.
+CTRL-F10      Capture/Release the mouse.
+CTRL-F11      Slow down emulation (Decrease DOSBox Cycles).
+CTRL-F12      Speed up emulation (Increase DOSBox Cycles).
+ALT-F12       Unlock speed (turbo button).
+
+These are the default keybindings. They can be changed in the keymapper.
+
+Saved/recorded files can be found in current_directory/capture 
+(can be changed in the configfile). 
+The directory has to exist prior to starting DOSBox, otherwise nothing 
+gets saved/recorded !
+
+
+NOTE: Once you increase your DOSBox cycles beyond your computer's maximum
+capacity, it will produce the same effect as slowing down the emulation.
+This maximum will vary from computer to computer.
+
+
