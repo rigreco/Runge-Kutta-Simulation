@@ -8,5 +8,5 @@ It allow to simulate different mathematical models such as:
 * Resistance Capacitor electrical circuit,
 * Direct Current electric motor,
 * Alternating Current three phase induction motor.
-* 
+
 https://cloud.githubusercontent.com/assets/10941944/6314894/71717efe-b9f0-11e4-8552-a8fe283bb92a.png
