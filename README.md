@@ -19,3 +19,33 @@ It allow to simulate different mathematical models such as:
 ![alt tag](https://cloud.githubusercontent.com/assets/10941944/6314897/7a2587f2-b9f0-11e4-85cf-aa073b315c51.png)
 
 ![alt tag](https://cloud.githubusercontent.com/assets/10941944/6314898/7d1d67f4-b9f0-11e4-9f37-fb7fba42e4cb.png)
+
+## Build Instructions
+
+### For Building from Source
+
+**Prerequisites:**
+- Windows with DOSBox support (or Windows XP/7)
+- Apple II emulator (AppleWin recommended)
+- ProDOS disk utility (CiderPress recommended)
+
+**Quick Build:**
+1. Copy `AppleX/` folder to `C:\AppleX\`
+2. Double-click `Aztec Apple C6502 DOSBox Prompt.lnk` (for modern Windows) 
+3. Navigate to project directory: `cd [project-path]`
+4. Build: `make` (creates RCRK.SYS and *.OVR files)
+5. Use CiderPress or similar tool to copy files to ProDOS disk image
+6. Test: Load `RKSIM.po` in Apple II emulator
+
+**For complete setup details, read:**
+- `AppleX/ReadMe.txt` - Installation and environment setup
+- `AppleX/ReadFirst.txt` - AppleX features and documentation
+- `AppleX/XBox.txt` - DOSBox configuration
+
+### For Immediate Use
+Simply load `RKSIM.po` in an Apple II emulator - no build required.
+
+---
+
+**Thanks to Bill Buckels for his invaluable support:**
+* Aztec C compilers http://www.aztecmuseum.ca/compilers.htm
